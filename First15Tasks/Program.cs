@@ -71,7 +71,7 @@ namespace First15Tasks
             else { valid = false; }
             //checking eligiblility
 
-            if ((valid) && (userAge > 18))
+            if ((valid) && (userAge >= 18))
             {
                 Console.WriteLine("The person is eligible to vote.");
 
@@ -129,10 +129,10 @@ namespace First15Tasks
             //Classification
             string weather;
 
-            if (fahrenheit < 10)
+            if (celsius < 10)
             {
                 weather = "Cold";
-            } else if ((10 <= fahrenheit) && (fahrenheit <= 30))
+            } else if ((10 <= celsius) && (celsius <= 30))
             {
                 weather = "Mild";
             }
@@ -201,10 +201,225 @@ namespace First15Tasks
             //print bill info
             Console.WriteLine("Original bill: " + bill + ",Discount amount:" + discountAmount + ", Final amount:" + (bill - discountAmount));
 
+            //Task 9 - Day Name Finder
+            Console.WriteLine("");
+            Console.WriteLine("Task 9 - Day Name Finder");
+            Console.WriteLine("");
+            //usr input
+            Console.Write("enter a number from 1 to 7 (day of the week): ");
+            int dayNum = Convert.ToInt32(Console.ReadLine());
+            //based on num the day will be printed
+            switch (dayNum)
+            {
+                case 1:
+                    Console.WriteLine("Sunday");
+                    break;
+                case 2 :
+                    Console.WriteLine("Monday");
+                    break;
+                case 3 : Console.WriteLine("Tuesday");
+                    break;
+                case 4:
+                    Console.WriteLine("Wednesday");
+                    break;
+                case 5:
+                    Console.WriteLine("Thursday");
+                    break;
+                case 6:
+                    Console.WriteLine("Friday");
+                    break;
+                case 7:
+                    Console.WriteLine("Saturday");
+                    break;
+                default:
+                    Console.WriteLine("Invalid day number");
+                    break;
 
-            //i will be skipping task 9-13 and 15 because of the repetitve nature of the code + save time, all the ideas are the same no matter the difficulty
-            //im also skipping because i have things i need to do so im sorry in-advance i try my best to fulfil all the tasks faithfully and do what i can with the the 
-            // time constraint !
+            }
+            //Task 10 - Mini Calculator
+            Console.WriteLine("");
+            Console.WriteLine("Task 10 - Mini Calculator");
+            Console.WriteLine("");
+            //user input
+            Console.Write("Enter the First number: ");
+            double firstNum = double.Parse(Console.ReadLine());
+            Console.Write("Enter the Second number: ");
+            double secondNum = double.Parse(Console.ReadLine());
+            Console.Write("Enter the operation symbol (+, -, *, /, or %): ");
+            char operatorChar =char.Parse(Console.ReadLine());
+
+            //preform computations
+            switch (operatorChar) {
+            
+                case '+':
+                    Console.WriteLine(firstNum + secondNum);
+
+                    break;
+                case '-':
+                    Console.WriteLine(firstNum - secondNum);
+
+                    break;
+                case '*':
+                    Console.WriteLine(firstNum - secondNum);
+
+                    break;
+                case '/':
+                    if (secondNum != 0)
+                    {
+                        Console.WriteLine(firstNum / secondNum);
+                    }
+                    else { Console.WriteLine("Cannot divide by zero"); }
+
+                    break;
+                case '%':
+                    if (secondNum != 0)
+                    {
+                        Console.WriteLine(firstNum % secondNum);
+                    }
+                    else { Console.WriteLine("Cannot divide by zero"); }
+
+
+                    break;
+
+                default:
+                    Console.WriteLine("Invalid operator");
+
+                    break;
+
+                }
+
+            //Task 11 - Loan Eligibility System
+            Console.WriteLine("");
+            Console.WriteLine("Task 11 - Loan Eligibility System");
+            Console.WriteLine("");
+
+            //check user age/income/loan
+            Console.Write("Enter your age: ");
+            int ageConfirm = Convert.ToInt32(Console.ReadLine());
+            //income
+            Console.Write("Enter your monthly income: ");
+            int monthlyIncome = Convert.ToInt32(Console.ReadLine());
+            //loan
+            Console.Write("Do you have an existing loan (yes/no): ");
+            string loanChck =Console.ReadLine();
+
+            if(((ageConfirm>= 21)&& (ageConfirm <= 60)) && (monthlyIncome>= 400) && (loanChck == "no"))
+            {
+                Console.WriteLine("The user is eligible");
+            }
+            else
+            {
+                //this will only show 1 reason though not all 
+                if(!((ageConfirm >= 21) && (ageConfirm <= 60)))
+                {
+                    Console.WriteLine("The age is out of range");
+                }else if(!(monthlyIncome >= 400))
+                {
+                    Console.WriteLine("The income too low");
+                }
+                else
+                {
+                    Console.WriteLine("The user has an existing loan");
+                }
+            }
+            //Task 12 - Shipping Cost Calculator
+            Console.WriteLine("");
+            Console.WriteLine("Task 12 - Shipping Cost Calculator");
+            Console.WriteLine("");
+            //user input
+            //region
+            Console.Write("Enter a region code ('A' for local, 'B' for national, 'C' for international): ");
+            char region = char.Parse(Console.ReadLine());
+            //weight
+            Console.Write("Enter the package weight (in kg): ");
+            double weight = double.Parse(Console.ReadLine());
+            //set varaibles
+            double baseCost = 0;
+            double extraCharge = 0;
+            //check cost
+            switch (region)
+            {
+
+                case 'A':
+                    baseCost=1;
+                    if(weight > 5) { extraCharge += 2; }
+                    else if (weight > 10) { extraCharge += 5; }
+                    else { extraCharge = 0; }
+                    Console.WriteLine("Base cost:"+ baseCost);
+                    Console.WriteLine("Extra charge:" + extraCharge);
+                    Console.WriteLine("Total shipping:" + (extraCharge+ baseCost));
+
+
+                    break;
+                case 'B':
+                    baseCost = 3;
+                    if (weight > 5) { extraCharge += 2; }
+                    else if (weight > 10) { extraCharge += 5; }
+                    else { extraCharge = 0; }
+                    Console.WriteLine("Base cost:" + baseCost);
+                    Console.WriteLine("Extra charge:" + extraCharge);
+                    Console.WriteLine("Total shipping:" + (extraCharge + baseCost));
+
+
+                    break;
+                case 'C':
+                    baseCost = 7;
+                    if (weight > 5) { extraCharge += 2; }
+                    else if (weight > 10) { extraCharge += 5; }
+                    else { extraCharge = 0; }
+                    Console.WriteLine("Base cost:" + baseCost);
+                    Console.WriteLine("Extra charge:" + extraCharge);
+                    Console.WriteLine("Total shipping:" + (extraCharge + baseCost));
+
+
+                    break;
+         
+
+                default:
+                    Console.WriteLine("Invalid region");
+
+                    break;
+
+            }
+
+            //Task 13 - Triangle Type Classifier
+            Console.WriteLine("");
+            Console.WriteLine("Task 13 - Triangle Type Classifier");
+            Console.WriteLine("");
+
+            //triangle sides
+            Console.Write("Enter the length of the first side: ");
+            double firstSide = double.Parse(Console.ReadLine());
+            Console.Write("Enter the length of the second side: ");
+            double secSide = double.Parse(Console.ReadLine());
+            Console.Write("Enter the length of the third side: ");
+            double thirdSide = double.Parse(Console.ReadLine());
+
+            //check if any combo is valid
+            if((firstSide + secSide > thirdSide) || (firstSide + thirdSide > secSide) || (secSide + thirdSide > firstSide))
+            {
+                if ((firstSide == secSide) &&(secSide == thirdSide)) {
+
+                    Console.WriteLine("The sides form an Equilateral triangle ");
+                }else if( (firstSide == thirdSide) || (thirdSide==secSide) || (firstSide == secSide))
+                {
+                    Console.WriteLine("The sides form an Isosceles triangle");
+                }
+                else
+                {
+                    Console.WriteLine("The sides form a Scalene triangle");
+                }
+            }
+            else
+            {
+                Console.WriteLine("The sides do not form a valid triangle");
+            }
+
+
+
+
+
+
 
 
 
@@ -275,9 +490,61 @@ namespace First15Tasks
 
 
             }
+            //Task 15 - University Admission Decision
+            Console.WriteLine("");
+            Console.WriteLine("Task 15 - University Admission Decision");
+            Console.WriteLine("");
+
+            //user input
+            Console.Write("Enter the program type ('S' for Science, 'A' for Arts): ");
+            char programType = char.Parse(Console.ReadLine());
+
+            //GPA
+            Console.Write("Enter your GPA(out of 4): ");
+            double GPA = double.Parse(Console.ReadLine());
+            //examscore
+            Console.Write("Enter your entrance exam score(out of 100): ");
+            double examScore = double.Parse(Console.ReadLine());
+            //achievement
+            Console.Write("Do you have an extracurricular achievement (yes/no): ");
+            string achievement = Console.ReadLine();
+            //set variable
+            string finalResult = "";
 
 
-        } 
+
+
+            switch (programType) {
+
+
+                case 'S':
+                    if((GPA>=3.0) && (examScore >= 75))
+                    {
+                        finalResult = "Admitted";
+                    }else if (achievement == "yes") { finalResult = "Conditionally Admitted"; }
+                    else{ finalResult = "Not Admitted"; }
+                    Console.WriteLine("Program type: Science, Finals result:"+ finalResult);
+
+                    break;
+                case 'A':
+                    if ((GPA >= 2.5) && (examScore >= 60))
+                    {
+                        finalResult = "Admitted";
+                    }
+                    else if (achievement == "yes") { finalResult = "Conditionally Admitted"; }
+                    else { finalResult = "Not Admitted"; }
+                    Console.WriteLine("Program type: Arts, Finals result:" + finalResult);
+                    break;
+                default:
+                    Console.WriteLine("Invalid program type");
+                    break;
+            
+            }
+        }
+
+
+
+    }
 
 
 
@@ -294,7 +561,7 @@ namespace First15Tasks
 
 
     }
-}
+
 
 
 
