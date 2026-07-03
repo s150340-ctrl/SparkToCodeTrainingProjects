@@ -50,7 +50,7 @@ namespace Task_2
             Console.Write("Enter a positive whole number N:");
             int num3 = Convert.ToInt32(Console.ReadLine());
 
-            
+            //print time table
 
             for (int i = 1; i < 11; i++)
             {
@@ -58,9 +58,51 @@ namespace Task_2
 
             }
 
+            //Task 4 - Password Retry
+            Console.WriteLine("");
+            Console.WriteLine("Task 4 - Password Retry");
+            Console.WriteLine("");
+            //password
+            string code = "Spark2026";
+            Console.WriteLine("Enter the password:");
+            string check = Console.ReadLine();
+            while (check != code)
+            {
+                Console.WriteLine("Incorrect password, try again");
+                Console.WriteLine("Enter the password:");
+                 check = Console.ReadLine();
+
+            }
+            Console.WriteLine("Access Granted");
 
 
+            //Task 5 - Number Guessing Game
+            Console.WriteLine("");
+            Console.WriteLine("Task 5 - Number Guessing Game");
+            Console.WriteLine("");
 
-    }
+            int counter = 0;
+            int secretNum = 42;
+            int numGuess = 0;
+            
+
+            //loop body
+            do
+            {
+                Console.WriteLine(" Guess the number:");
+                numGuess = Convert.ToInt32(Console.ReadLine());
+                counter++;
+                if (numGuess < secretNum) { Console.WriteLine("Too low"); }
+                else if (numGuess > secretNum) { Console.WriteLine("Too high"); }
+                else { Console.WriteLine("Correct!"); }
+            } while (secretNum != numGuess);
+
+
+            //Task 6 - Safe Division Calculator
+            Console.WriteLine("");
+            Console.WriteLine("Task 6 - Safe Division Calculator");
+            Console.WriteLine("");
+
+        }
     }
 }
