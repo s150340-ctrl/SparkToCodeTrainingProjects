@@ -307,23 +307,59 @@ namespace Task_3
                 {
                     Console.WriteLine("Error : invalid input");
 
+            }
 
-
-
+           
 
 
             }
 
+            //Task 11 - One-Time Password (OTP) Generator
 
+            Console.WriteLine();
+            Console.WriteLine("Task 11 - One-Time Password (OTP) Generator");
+            Console.WriteLine();
 
+            //generate a random 4-digit number
+            Random random = new Random(); //single instance
+            int randomNum = random.Next(1000, 10000);//number between 1000 and 9999 
 
+            //set variables to control loop
+            int attempts = 3;
+            int tries = 0;
+            int attemptedPin = 0;
+            Console.WriteLine("Enter the PIN shown here : "+ randomNum);
+            while (attempts != tries)
+            {
+                try
+                {
+                    Console.Write("Verfiy PIN that was shown:");
+                     attemptedPin = Convert.ToInt32(Console.ReadLine());
+                    tries++;
+                    if (attemptedPin == randomNum) {
+                        Console.WriteLine("Verified");
+                        break;
 
-
-
+                    }
+                    else
+                    {
+                        Console.WriteLine("Try again");
+                    }
+                }catch(Exception ex)
+                {
+                    Console.WriteLine("Invalid input");
+                    tries++;
+            }
 
 
         }
-    }
+            if(attemptedPin != randomNum)
+            {
+                Console.WriteLine("Verification Failed");//only when all tries have been completed and pin is incorrect does this line run
+            }
+
+
+}
 }
 }
 
