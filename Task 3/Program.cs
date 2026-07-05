@@ -69,8 +69,44 @@ namespace Task_3
 
                 }
                 catch (Exception ex)
-                { Console.WriteLine("that's not a valid name"); }
+                { Console.WriteLine("that's not a valid name"); }//this wont happen because all input are string
             }
+
+            //Task 4 - Subscription End Date
+
+            Console.WriteLine();
+            Console.WriteLine("Task 4 - Subscription End Date");
+            Console.WriteLine();
+            //ask user
+            DateTime date = DateTime.Today;
+            int numDays = -1;
+
+            while (true)
+            {
+
+                try
+                {
+                    Console.Write("Enter the number of days of a free trial:");
+                     numDays =Convert.ToInt32( Console.ReadLine());
+                    if (numDays>=0 )//user entered a valid number 
+                    {
+                        DateTime trailEnd = date.AddDays(numDays);
+                        string trailEnds = trailEnd.ToString("yyyy-MM-dd");
+                        Console.WriteLine("Trial ends at " + trailEnds);
+                        break;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Enter a positive number");
+                    }
+                    
+
+
+                }
+                catch (Exception ex)
+                { Console.WriteLine("that's not a valid number"); }
+            }
+
 
 
         }
