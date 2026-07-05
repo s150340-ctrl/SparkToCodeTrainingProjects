@@ -107,6 +107,48 @@ namespace Task_3
                 { Console.WriteLine("that's not a valid number"); }
             }
 
+            //Task 5 - Grade Rounding System
+
+            Console.WriteLine();
+            Console.WriteLine("Task 5 - Grade Rounding System");
+            Console.WriteLine();
+            //set varaibles to use
+            double examScore = 0;
+
+            //ask user
+            while (true)
+            {
+
+                try
+                {
+                    Console.Write("Enter your raw exam score as a decimal number (e.g. 74.6):");
+                    examScore = Convert.ToDouble(Console.ReadLine());
+                    if (examScore >= 0)//user entered a valid number 
+                    {
+                        examScore = Math.Round(examScore);
+                        if (examScore >= 60)
+                        {
+                            Console.WriteLine("You passed with a rounded score of :"+examScore);
+                        }
+                        else
+                        {
+                            Console.WriteLine("You failed with a rounded score of :" + examScore);
+                        }
+                        break;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Enter a positive number");
+                    }
+
+
+
+                }
+                catch (Exception ex)
+                { Console.WriteLine("that's not a valid number"); }
+            }
+
+
 
 
         }
