@@ -38,9 +38,9 @@ namespace Task_3
                 Console.Write("Enter a number:");
                 double number = Convert.ToDouble((string)Console.ReadLine());
                 //print its square
-                Console.WriteLine(number +"square is :"+Math.Pow(number, 2));
+                Console.WriteLine(number +" square is :"+Math.Pow(number, 2));
                 //print its square root
-                Console.WriteLine(number + "square root is :" + Math.Sqrt(number));
+                Console.WriteLine(number + " square root is :" + Math.Sqrt(number));
 
 
             }
@@ -69,7 +69,7 @@ namespace Task_3
 
                 }
                 catch (Exception ex)
-                { Console.WriteLine("that's not a valid name"); }//this wont happen because all input are string
+                { Console.WriteLine("that's not a valid name"); }//this wont happen because all input are string only if null refrence
             }
 
             //Task 4 - Subscription End Date
@@ -257,9 +257,9 @@ namespace Task_3
                     Console.Write("Entera a decimal number:");
                     number9 = Convert.ToDouble(Console.ReadLine());
                     //print 3 different roundings of it
-                    Console.WriteLine("nearest whole number"+Math.Round(number9));
-                    Console.WriteLine("always rounded up" + Math.Ceiling(number9));
-                    Console.WriteLine("always rounded down" + Math.Floor(number9));
+                    Console.WriteLine("nearest whole number "+Math.Round(number9));
+                    Console.WriteLine("always rounded up " + Math.Ceiling(number9));
+                    Console.WriteLine("always rounded down " + Math.Floor(number9));
                     break;
 
 
@@ -269,6 +269,48 @@ namespace Task_3
                 {
                     Console.WriteLine("That is not a valid value");
                 }
+
+            }
+
+            //Task 10 - Word Position Finder
+
+            Console.WriteLine();
+            Console.WriteLine("Task 10 - Word Position Finder");
+            Console.WriteLine();
+            //keep reading from user until valid input
+            while(true) {
+
+                try
+                {
+                    Console.Write("Entera a  full sentence :");
+                    string fullSentance =Console.ReadLine();
+                    Console.Write("Entera a word to search for :");
+                    string word = Console.ReadLine();
+                    //check if sentance contains word
+                    if(fullSentance.Contains(word) ){
+                        //check index location
+                        //first occurance
+                        Console.WriteLine("First-occurrence position at index "+ fullSentance.IndexOf(word));
+                        //last ocuurance
+                        Console.WriteLine("Last-occurrence position at index " + fullSentance.LastIndexOf(word));
+                        break; //exit program
+
+                    }
+                    else
+                    {
+                        Console.WriteLine("not found");
+                        break;
+                    }
+
+                }
+                catch(Exception ex)
+                {
+                    Console.WriteLine("Error : invalid input");
+
+
+
+
+
 
             }
 
@@ -283,5 +325,7 @@ namespace Task_3
         }
     }
 }
+}
+
 
 
