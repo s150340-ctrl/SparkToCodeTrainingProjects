@@ -2,4 +2,5 @@
   <Project Path="First15Tasks/First15Tasks.csproj" />
   <Project Path="FirstCSharpProject/FirstCSharpProject.csproj" />
   <Project Path="Task 2/Task 2.csproj" Id="e1c76397-27b7-40da-ab15-5a02015db260" />
+  <Project Path="Task 3/Task 3.csproj" Id="5a8f26b7-9caf-4268-84a2-4ee2ca6b989a" />
 </Solution>
