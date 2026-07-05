@@ -47,6 +47,30 @@ namespace Task_3
             catch (Exception ex)
             { Console.WriteLine("that's not a valid number"); }
 
+            //Task 3 - Name Formatter
+            Console.WriteLine();
+            Console.WriteLine("Task 3 - Name Formatter");
+            Console.WriteLine();
+
+            while (true)
+            {
+                try
+                {
+                    Console.Write("Enter your full name:");
+                    string fullName = Console.ReadLine();
+                    if (fullName != "")
+                    {
+                        Console.WriteLine("Your full name in capital letters:"+fullName.ToUpper());
+                        Console.WriteLine("Your full name in small letters:" + fullName.ToLower());
+                        Console.WriteLine("Your name contains " + fullName.Length +" letters");
+                        break;
+                    }
+
+
+                }
+                catch (Exception ex)
+                { Console.WriteLine("that's not a valid name"); }
+            }
 
 
         }
