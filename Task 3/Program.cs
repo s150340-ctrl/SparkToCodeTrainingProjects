@@ -148,7 +148,36 @@ namespace Task_3
                 { Console.WriteLine("that's not a valid number"); }
             }
 
+            //Task 6 - Password Strength Checker
 
+            Console.WriteLine();
+            Console.WriteLine("Task 6 - Password Strength Checker");
+            Console.WriteLine();
+            string password = ""; //set varaible
+            while (true)
+            {
+                Console.Write("Enter your password:");
+                password = (Console.ReadLine()).ToLower();
+                if((password.Length >=8) && !((password.Contains("password")))){
+
+                    Console.WriteLine("The password "+ password+ " is strong");
+                    break;
+                }
+                else
+                {
+                    if((password.Length< 8 )&& (password.Contains("password")))
+                    {
+                        Console.WriteLine("Your password is weak because it contains the word password and has less than 8 characters");
+                    }else if (password.Length< 8){ 
+                        
+                        Console.WriteLine("Your password is weak because it has less than 8 characters");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Your password is weak because it contains the word password");
+                    }
+                }
+            }
 
 
         }
