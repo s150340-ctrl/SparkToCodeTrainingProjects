@@ -180,6 +180,35 @@ namespace Task_3
             }
 
 
+
+            //Task 7 - Clean Name Comparator
+
+            Console.WriteLine();
+            Console.WriteLine("Task 7 - Clean Name Comparator");
+            Console.WriteLine();
+
+            string checkName = ""; //set varaible
+            string checkName2 = "";
+            while (true)
+            {
+                Console.Write("Enter your name:");
+                checkName = ((Console.ReadLine()).ToLower()).Trim();
+                Console.Write("Enter your name again:");
+                checkName2 = ((Console.ReadLine()).ToLower()).Trim();
+
+                if (checkName == checkName2)
+                {
+                    Console.WriteLine("Match");
+
+                    break;
+                }
+                else
+                {
+                    Console.WriteLine("No Match");
+                }
+            }
+
+
         }
     }
 }
