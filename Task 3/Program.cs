@@ -243,9 +243,39 @@ namespace Task_3
 
             }
 
-           
+            //Task 9 - Round Up / Round Down Explorer
 
-            
+            Console.WriteLine();
+            Console.WriteLine("Task 9 - Round Up / Round Down Explorer");
+            Console.WriteLine();
+            //ask user for input
+            double number9 = 0;
+            while (true)
+            {
+                try
+                {
+                    Console.Write("Entera a decimal number:");
+                    number9 = Convert.ToDouble(Console.ReadLine());
+                    //print 3 different roundings of it
+                    Console.WriteLine("nearest whole number"+Math.Round(number9));
+                    Console.WriteLine("always rounded up" + Math.Ceiling(number9));
+                    Console.WriteLine("always rounded down" + Math.Floor(number9));
+                    break;
+
+
+
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("That is not a valid value");
+                }
+
+            }
+
+
+
+
+
 
 
 
