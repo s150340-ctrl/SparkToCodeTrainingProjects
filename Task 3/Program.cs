@@ -334,9 +334,10 @@ namespace Task_3
                 try
                 {
                     Console.Write("Verfiy PIN that was shown:");
-                     attemptedPin = Convert.ToInt32(Console.ReadLine());
+                    attemptedPin = Convert.ToInt32(Console.ReadLine());
                     tries++;
-                    if (attemptedPin == randomNum) {
+                    if (attemptedPin == randomNum)
+                    {
                         Console.WriteLine("Verified");
                         break;
 
@@ -345,20 +346,79 @@ namespace Task_3
                     {
                         Console.WriteLine("Try again");
                     }
-                }catch(Exception ex)
+                }
+                catch (Exception ex)
                 {
                     Console.WriteLine("Invalid input");
                     tries++;
+                }
             }
 
 
-        }
+        
             if(attemptedPin != randomNum)
             {
                 Console.WriteLine("Verification Failed");//only when all tries have been completed and pin is incorrect does this line run
             }
 
 
+            //Task 12 - Birthday Insights
+
+            Console.WriteLine();
+            Console.WriteLine("Task 12 - Birthday Insights");
+            Console.WriteLine();
+            //set comparisn
+            DateTime todayComp = DateTime.Today;
+            int yearNow = todayComp.Year;
+            int monthNow = todayComp.Month;
+            int dayNow = todayComp.Day;
+            int age = 0; // just for now
+
+            //ask user
+            while(true)
+            {
+                try
+                {
+                    Console.Write("Enter your date of birth as text (e.g. \"2000-05-14\") : ");
+                    DateTime birthDate = DateTime.Parse(Console.ReadLine());
+                    //get info from birth date
+                    int birthMonth = birthDate.Month; 
+                    int birthYear = birthDate.Year;
+                    int birthday = birthDate.Day;
+                    DayOfWeek dayName = birthDate.DayOfWeek; // get name of day
+                    age = yearNow - birthYear;
+                    if (monthNow < birthMonth)
+                    {
+                        age--;
+                        Console.WriteLine("calculated age:"+age+ " ,Birth weekday:"+ dayName);
+                        break;
+
+                    }
+                    else
+                    {
+                        if (monthNow == birthMonth)// same month 
+                        {
+                            if (birthday > dayNow)
+                            { // birthday still didnt happen yet
+                                age--;
+                            }
+                           
+                        }
+                        //by defult age stays the same otherwise
+                        Console.WriteLine("calculated age:" + age + " ,Birth weekday:" + dayName);
+                        break;
+
+                    }
+
+
+
+                }
+                catch(Exception ex) {
+                    Console.WriteLine("Invalid input");
+                }
+
+
+            }
 }
 }
 }
