@@ -245,6 +245,10 @@ namespace Task_3
 
             //Task 9 - Round Up / Round Down Explorer
 
+            /*
+             used the function ceiling and floor to round up/down ceiling means round up because our roof is on our head and floor is under our feet so its round down
+            */
+
             Console.WriteLine();
             Console.WriteLine("Task 9 - Round Up / Round Down Explorer");
             Console.WriteLine();
@@ -273,6 +277,9 @@ namespace Task_3
             }
 
             //Task 10 - Word Position Finder
+            /*
+             used Indexof to find first instance and LastindexOf to find the last iinstance of a specific substring
+             */
 
             Console.WriteLine();
             Console.WriteLine("Task 10 - Word Position Finder");
@@ -319,7 +326,8 @@ namespace Task_3
             Console.WriteLine();
             Console.WriteLine("Task 11 - One-Time Password (OTP) Generator");
             Console.WriteLine();
-
+            /*in this task the radnom number generator was the thing i learned
+             */
             //generate a random 4-digit number
             Random random = new Random(); //single instance
             int randomNum = random.Next(1000, 10000);//number between 1000 and 9999 
@@ -363,6 +371,18 @@ namespace Task_3
 
 
             //Task 12 - Birthday Insights
+
+            /*In this task i used
+            DateTime todayComp = DateTime.Today;
+            int yearNow = todayComp.Year;
+            int monthNow = todayComp.Month;
+            int dayNow = todayComp.Day;     they are the new things i learned how to extract each year/day/month separetly
+            as well as  DayOfWeek dayName = birthDate.DayOfWeek; which gives me the day of the week of a given date
+             
+             
+             
+             
+             */
 
             Console.WriteLine();
             Console.WriteLine("Task 12 - Birthday Insights");
