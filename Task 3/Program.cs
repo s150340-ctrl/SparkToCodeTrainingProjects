@@ -1,4 +1,6 @@
-﻿namespace Task_3
+﻿using System.Net.Quic;
+
+namespace Task_3
 {
     internal class Program
     {
@@ -25,6 +27,27 @@
             }
             catch (Exception ex)
             { Console.WriteLine("that's not a valid number"); }
+
+            //Task 2 - Power & Root Explorer
+            Console.WriteLine();
+            Console.WriteLine("Task 2 - Power & Root Explorer");
+            Console.WriteLine();
+
+            try
+            {
+                Console.Write("Enter a number:");
+                double number = Convert.ToDouble((string)Console.ReadLine());
+                //print its square
+                Console.WriteLine(number +"square is :"+Math.Pow(number, 2));
+                //print its square root
+                Console.WriteLine(number + "square root is :" + Math.Sqrt(number));
+
+
+            }
+            catch (Exception ex)
+            { Console.WriteLine("that's not a valid number"); }
+
+
 
         }
     }
