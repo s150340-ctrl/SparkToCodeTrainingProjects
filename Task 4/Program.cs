@@ -6,6 +6,21 @@ namespace Task_4
 {
     internal class Program
     {
+
+        //create 3 overloaded functions (for task 9)
+        static int Multiply(int n, int y)
+        {
+            return n * y;
+        }
+        static double Multiply(double n, double y)
+        {
+            return n * y;
+        }
+        static int Multiply(int n, int y, int z)
+        {
+            return n * y * z;
+        }
+
         static void Main(string[] args)
         {
             //Task 1 - Personalized Welcome Function
@@ -273,6 +288,21 @@ namespace Task_4
 
 
             }
+
+            //Task 9 - Overloaded Multiply Function
+
+
+            Console.WriteLine();
+            Console.WriteLine("Task 9 - Overloaded Multiply Function\r\n");
+            Console.WriteLine();
+
+            //use all three sepreatly
+            Console.WriteLine("Mutiplication of 2 integers 3 and 2 is " + Multiply(3, 2));
+            Console.WriteLine("Mutiplication of 2 doubles 3.2 and 2.3 is " + Multiply(3.2, 2.3));
+            Console.WriteLine("Mutiplication of 3 integers 3 and 2 and 5 is " + Multiply(3, 2, 5));
+
+            
+
 
 
 
