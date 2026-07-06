@@ -58,6 +58,36 @@
                 { Console.WriteLine("ERROR: Invalid input"); }
             }
 
+            //Task 3 - Celsius to Fahrenheit Function
+            Console.WriteLine();
+            Console.WriteLine("Task 3 - Celsius to Fahrenheit Function");
+            Console.WriteLine();
+            //function
+            double CelsiusToFahrenheit(double celsius) {
+
+
+                return ((celsius * 9 / 5) + 32); //returns Fahrenheit value (double) 
+            }
+            //variables needed
+            double celsius = 0;
+            double fahrenheit = 0;
+            //read from user
+            while (true)
+            {
+                try
+                {
+                    Console.Write("Enter a Celsius value:");
+                    celsius =double.Parse(Console.ReadLine());
+                    fahrenheit=CelsiusToFahrenheit(celsius); //conversion happens
+                    Console.WriteLine("The celsius value in fahrenheit:" + fahrenheit+" F");
+
+                    break; //leave loop
+                }
+                catch (Exception ex)
+                { Console.WriteLine("ERROR: Invalid input"); }
+            }
+
+
 
         }
     }
