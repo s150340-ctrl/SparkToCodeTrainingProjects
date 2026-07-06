@@ -20,6 +20,15 @@ namespace Task_4
         {
             return n * y * z;
         }
+        //create 2 overloaded functions (for task 10)
+        static double CalculateArea(double n)
+        {
+            return n * n;
+        }
+        static double CalculateArea(double n, double x)
+        {
+            return n * x;
+        }
 
         static void Main(string[] args)
         {
@@ -164,10 +173,9 @@ namespace Task_4
             Console.WriteLine("Task 6 - Rectangle Area & Perimeter Functions");
             Console.WriteLine();
             //two functions for computation
-            double CalculateArea(double length, double width)
-            {
-                return length * width;
-            }
+            //okay so i had a function here but in task 10 the same function was needed so
+            //i ended up deleting this one because the function is literally the same thing
+          
 
             double CalculatePerimeter(double length, double width)
             {
@@ -293,7 +301,7 @@ namespace Task_4
 
 
             Console.WriteLine();
-            Console.WriteLine("Task 9 - Overloaded Multiply Function\r\n");
+            Console.WriteLine("Task 9 - Overloaded Multiply Function");
             Console.WriteLine();
 
             //use all three sepreatly
@@ -301,7 +309,58 @@ namespace Task_4
             Console.WriteLine("Mutiplication of 2 doubles 3.2 and 2.3 is " + Multiply(3.2, 2.3));
             Console.WriteLine("Mutiplication of 3 integers 3 and 2 and 5 is " + Multiply(3, 2, 5));
 
-            
+
+            //Task 10 - Overloaded Area Calculator
+
+
+            Console.WriteLine();
+            Console.WriteLine("Task 10 - Overloaded Area Calculator");
+            Console.WriteLine();
+            //ask user for shape
+            while (true)
+            {
+                try
+                {
+                    Console.Write("Enter a shape (square/rectangle) :");
+                    string shape = ((Console.ReadLine()).ToLower()).Trim();
+                    if (shape == "square")
+                    {
+                        Console.Write("Enter a length :");
+                        double length10 = Convert.ToInt32(Console.ReadLine());
+                        //print and calculate area
+                        Console.WriteLine("Area :"+ CalculateArea(length10));
+                        break;
+
+                    }else if (shape == "rectangle")
+                    {
+                        Console.Write("Enter a length :");
+                        double length20 = Convert.ToInt32(Console.ReadLine());
+                        Console.Write("Enter a width :");
+                        double width20 = Convert.ToInt32(Console.ReadLine());
+                        //print and calculate area
+                        Console.WriteLine("Area :" + CalculateArea(length20, width20));
+                        break;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Invalid shape.Try again.");
+                    }
+
+
+
+
+
+                }
+                catch (Exception ex)
+                { Console.WriteLine("ERROR: Invalid input"); }
+
+
+
+            }
+
+
+
+
 
 
 
