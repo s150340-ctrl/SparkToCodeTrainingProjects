@@ -240,6 +240,40 @@ namespace Task_4
             }
 
 
+            //Task 8 - Countdown Function
+
+            Console.WriteLine();
+            Console.WriteLine("Task 8 - Countdown Function");
+            Console.WriteLine();
+
+
+            static void Countdown (int n)
+            {
+                for (int i = n; i > 0; i--)
+                {
+                    Console.WriteLine(i);
+                }
+            }
+
+            //now we ask user
+            while (true)
+            {
+                try
+                {
+                    Console.Write("Enter a starting number (int) :");
+                    int start = Convert.ToInt32(Console.ReadLine());
+                    Countdown(start); //countdown will print here
+                    break;//leave loop
+
+
+                }
+                catch (Exception ex)
+                { Console.WriteLine("ERROR: Invalid input"); }
+
+
+
+            }
+
 
 
 
@@ -248,4 +282,5 @@ namespace Task_4
         }
     }
 }
+
 
