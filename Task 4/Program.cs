@@ -591,15 +591,15 @@ namespace Task_4
             {
                 try
                 {
-                    Console.Write("Enter your name");
+                    Console.Write("Enter your name: ");
                     string name12= Console.ReadLine();
                     //now ask for grades
-                    Console.WriteLine("Enter your 3 grades");
-                    Console.Write("Enter your 1st grade");
+                    Console.WriteLine("Enter your 3 grades: ");
+                    Console.Write("Enter your 1st grade: ");
                     grade1 = Convert.ToDouble(Console.ReadLine());
-                    Console.Write("Enter your 2nd grade");
+                    Console.Write("Enter your 2nd grade: ");
                     grade2 = Convert.ToDouble(Console.ReadLine());
-                    Console.Write("Enter your 3rd grade");
+                    Console.Write("Enter your 3rd grade: ");
                     grade3 = Convert.ToDouble(Console.ReadLine());
                     if ((grade1 >= 0) && (grade2 >= 0) && (grade3 >= 0))//checks if positive
                     {
