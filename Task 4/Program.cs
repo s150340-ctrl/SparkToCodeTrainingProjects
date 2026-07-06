@@ -88,6 +88,24 @@
             }
 
 
+            //Task 4 - Fixed Menu Display Function
+            Console.WriteLine();
+            Console.WriteLine("Task 4 - Fixed Menu Display Function");
+            Console.WriteLine();
+
+            //function for display
+            static void DisplayMenu(){
+                Console.WriteLine("============");
+                Console.WriteLine("1) Start");
+                Console.WriteLine("2) Help");
+                Console.WriteLine("3) Exit");
+                Console.WriteLine("============");
+
+            }
+
+            //call to actually display menu
+            DisplayMenu();
+
 
         }
     }
