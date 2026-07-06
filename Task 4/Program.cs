@@ -31,6 +31,34 @@
             }
 
 
+            //Task 2 - Square Number Function
+            Console.WriteLine();
+            Console.WriteLine("Task 2 - Square Number Function");
+            Console.WriteLine();
+
+            //function
+            int Square(int n) {
+             return Convert.ToInt32(Math.Pow(n, 2));
+            }
+            int number = 0; //just for now
+            while (true)
+            {
+                try
+                {
+                    Console.Write("Enter a number:");
+                    number = Convert.ToInt32(Console.ReadLine());
+                    int numSquared = Square(number);
+                    Console.WriteLine("The number square is "+ numSquared);
+
+
+
+                    break; //leave loop
+                }
+                catch (Exception ex)
+                { Console.WriteLine("ERROR: Invalid input"); }
+            }
+
+
         }
     }
 }
