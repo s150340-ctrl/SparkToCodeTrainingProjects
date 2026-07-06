@@ -1,4 +1,5 @@
-﻿using System.Reflection.Metadata;
+﻿using System.Diagnostics.Metrics;
+using System.Reflection.Metadata;
 using static System.Net.Mime.MediaTypeNames;
 
 namespace Task_4
@@ -172,7 +173,7 @@ namespace Task_4
                         double area = CalculateArea(length, width);
                         double perimeter = CalculatePerimeter(area, width);
 
-                        Console.WriteLine("the area is "+area);
+                        Console.WriteLine("the area is " + area);
                         Console.WriteLine("the perimeter is " + perimeter);
 
 
@@ -184,9 +185,59 @@ namespace Task_4
                 }
                 catch (Exception ex)
                 { Console.WriteLine("ERROR: Invalid input"); }
+
+
+
             }
 
 
+            //Task 7 - Grade Letter Function
+
+            Console.WriteLine();
+            Console.WriteLine("Task 7 - Grade Letter Function");
+            Console.WriteLine();
+
+            //function for gardes
+            string GetGradeLetter(int n)
+            {
+                if (n >= 90)
+                {
+                    return "A";
+                }else if (n >= 80)
+                {
+                    return "B";
+                }else if (n >= 70)
+                {
+                    return "C";
+                }else if(n >= 60)
+                {
+                    return "D";
+                }
+                else
+                {
+                    return "F";
+                }
+
+            }
+            //now we ask user
+            while (true)
+            {
+                try
+                {
+                    Console.Write("Enter your grade:");
+                    int grade = Convert.ToInt32(Console.ReadLine());
+                    string letterGrade = GetGradeLetter(grade);//gets grade
+                    Console.WriteLine("Your final grade is "+ letterGrade);
+                    break;//leave loop
+
+
+                }
+                catch (Exception ex)
+                { Console.WriteLine("ERROR: Invalid input"); }
+
+
+
+            }
 
 
 
