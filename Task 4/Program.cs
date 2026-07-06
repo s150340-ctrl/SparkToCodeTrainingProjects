@@ -30,6 +30,39 @@ namespace Task_4
             return n * x;
         }
 
+        //functions for task 11
+        static double Add(double x, double y) {
+        
+            return x + y;
+        }
+        static double Subtract(double x, double y)
+        {
+
+            return x - y;
+        }
+        static double MultiplyNumbers(double x, double y)
+        {
+
+            return x * y;
+        }
+        static double DivideNumbers(double x, double y)
+        {
+            try { double result = x / y;
+                return result;
+            
+            } 
+            catch(DivideByZeroException ex) // so apparantly  this wont happen because the numbers are double type it will just print infinity only if its int will it crash
+            {
+                return 0;
+            }
+           
+        }
+        static void DisplayResult(string name , double result)
+        {
+           Console.WriteLine("The result of "+ name +" is "+ result);
+        }
+
+
         static void Main(string[] args)
         {
             //Task 1 - Personalized Welcome Function
@@ -358,6 +391,85 @@ namespace Task_4
 
             }
 
+            //Task 11 - Function-Based Calculator
+
+
+            Console.WriteLine();
+            Console.WriteLine("Task 11 - Function-Based Calculator");
+            Console.WriteLine();
+            //set variables
+            string operation = "";
+            double result = 0;
+            double num1 = 0;
+            double num2 = 0;
+            //print menu 
+            while (true)
+            {
+                try
+                {
+                    Console.WriteLine("=====================================");
+                    Console.WriteLine("choose an option from the menu:");
+                    Console.WriteLine("1) Addition");
+                    Console.WriteLine("2)Subtraction");
+                    Console.WriteLine("3)Multiplication");
+                    Console.WriteLine("4)Division");
+                    Console.WriteLine("5)Exit");
+                    Console.Write("=====================================");
+                    //read from user
+                    int choice = Convert.ToInt32(Console.ReadLine());
+                    if (choice != 5)
+                    {
+                        //only read 2 numbers for other numbers even if their not from option 
+                        Console.Write("Enter the first number:");
+
+                        num1 = Convert.ToDouble(Console.ReadLine());
+                        Console.Write("Enter the second number:");
+
+                        num2 = Convert.ToDouble(Console.ReadLine());
+
+
+                    }
+                    switch (choice)
+                    {
+
+
+                        case 1:
+                            operation = "Addition";
+                            result = Add(num1, num2);
+                            DisplayResult(operation, result);
+                            break;
+
+                        case 2:
+                            operation = "Subtraction";
+                            result = Subtract(num1, num2);
+                            DisplayResult(operation, result);
+                            break;
+                        case 3:
+                            operation = "Multiplication";
+                            result = MultiplyNumbers(num1, num2);
+                            DisplayResult(operation, result);
+                            break;
+                        case 4:
+                            operation = "Division";
+                            result = DivideNumbers(num1, num2);
+                            DisplayResult(operation, result);
+                            break;
+                        case 5:
+                            Console.Write("Exiting....");
+                            break;
+                        default:
+                            Console.WriteLine("That number isn't one of the options");
+                            break;
+
+                    }
+                    //check if choice is 5
+                    if (choice == 5)
+                    {
+                        break;// leave loop
+                    }
+                }
+                catch (Exception ex)
+                { Console.WriteLine("ERROR: Invalid input"); }
 
 
 
@@ -368,8 +480,50 @@ namespace Task_4
 
 
 
-        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            }
+               
+
+
+            }
+
+
+
+
+
+
+
+
+
+
+
+        
     }
 }
+
 
 
