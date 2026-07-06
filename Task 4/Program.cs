@@ -6,7 +6,55 @@ namespace Task_4
 {
     internal class Program
     {
+        //so fixed an issuethere was a task that has similar functions justdifferent data type so nned overriding
+        static string GetGradeLetter(int n)
+        {
+            if (n >= 90)
+            {
+                return "A";
+            }
+            else if (n >= 80)
+            {
+                return "B";
+            }
+            else if (n >= 70)
+            {
+                return "C";
+            }
+            else if (n >= 60)
+            {
+                return "D";
+            }
+            else
+            {
+                return "F";
+            }
 
+        }
+        static string GetGradeLetter(double n)
+        {
+            if (n >= 90)
+            {
+                return "A";
+            }
+            else if (n >= 80)
+            {
+                return "B";
+            }
+            else if (n >= 70)
+            {
+                return "C";
+            }
+            else if (n >= 60)
+            {
+                return "D";
+            }
+            else
+            {
+                return "F";
+            }
+
+        }
         //create 3 overloaded functions (for task 9)
         static int Multiply(int n, int y)
         {
@@ -61,6 +109,23 @@ namespace Task_4
         {
            Console.WriteLine("The result of "+ name +" is "+ result);
         }
+
+        //functions for task 12(only 2 because 1 of them alreeady made)
+        static void PrintReportCard(string name, double average,string grade) {
+
+            Console.WriteLine("The student name: " + name);
+            Console.WriteLine("The average : " + average);
+            Console.WriteLine("The grade : " + grade);
+
+        }
+
+        static double CalculateAverage(double x, double y, double z) {
+
+            return (x + y + z) / 3;
+
+        }
+
+
 
 
         static void Main(string[] args)
@@ -254,6 +319,8 @@ namespace Task_4
             Console.WriteLine();
 
             //function for gardes
+            //had to put it outside so i can override this function
+            /*
             string GetGradeLetter(int n)
             {
                 if (n >= 90)
@@ -274,7 +341,7 @@ namespace Task_4
                     return "F";
                 }
 
-            }
+            }*/
             //now we ask user
             while (true)
             {
@@ -506,10 +573,52 @@ namespace Task_4
 
 
             }
-               
+
+            //Task 12 - Student Report Card Generator
 
 
+            Console.WriteLine();
+            Console.WriteLine("Task 12 - Student Report Card Generator");
+            Console.WriteLine();
+            //set variables
+            double grade1 = 0;
+            double grade2= 0;
+            double grade3= 0;
+            double finalResult = 0;
+
+            //ask user
+            while (true)
+            {
+                try
+                {
+                    Console.Write("Enter your name");
+                    string name12= Console.ReadLine();
+                    //now ask for grades
+                    Console.WriteLine("Enter your 3 grades");
+                    Console.Write("Enter your 1st grade");
+                    grade1 = Convert.ToDouble(Console.ReadLine());
+                    Console.Write("Enter your 2nd grade");
+                    grade2 = Convert.ToDouble(Console.ReadLine());
+                    Console.Write("Enter your 3rd grade");
+                    grade3 = Convert.ToDouble(Console.ReadLine());
+                    if ((grade1 >= 0) && (grade2 >= 0) && (grade3 >= 0))//checks if positive
+                    {
+                        finalResult = CalculateAverage(grade1, grade2, grade3);
+                        string finalGrade = GetGradeLetter(finalResult);
+                        //print report
+                        PrintReportCard(name12, finalResult, finalGrade);
+                        break;
+
+
+                    }
+                }
+                catch (Exception ex)
+                { Console.WriteLine("ERROR: Invalid input"); }
             }
+
+
+
+        }
 
 
 
