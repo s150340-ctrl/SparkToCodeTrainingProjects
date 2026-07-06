@@ -1,4 +1,7 @@
-﻿namespace Task_4
+﻿using System.Reflection.Metadata;
+using static System.Net.Mime.MediaTypeNames;
+
+namespace Task_4
 {
     internal class Program
     {
@@ -139,6 +142,54 @@
                 catch (Exception ex)
                 { Console.WriteLine("ERROR: Invalid input"); }
             }
+
+            //Task 6 - Rectangle Area & Perimeter Functions
+            Console.WriteLine();
+            Console.WriteLine("Task 6 - Rectangle Area & Perimeter Functions");
+            Console.WriteLine();
+            //two functions for computation
+            double CalculateArea(double length, double width)
+            {
+                return length * width;
+            }
+
+            double CalculatePerimeter(double length, double width)
+            {
+                return 2* (length * width);
+            }
+
+            //now we ask user
+            while (true)
+            {
+                try
+                {
+                    Console.Write("Enter a length:");
+                    double length = Convert.ToDouble(Console.ReadLine());
+                    Console.Write("Enter a width:");
+                    double width = Convert.ToDouble(Console.ReadLine());
+                    if ((length >= 0) && (width >= 0)) //just checking if poth are positive
+                    {
+                        double area = CalculateArea(length, width);
+                        double perimeter = CalculatePerimeter(area, width);
+
+                        Console.WriteLine("the area is "+area);
+                        Console.WriteLine("the perimeter is " + perimeter);
+
+
+                        break; //leave loop
+                    }
+                    Console.WriteLine("ERROR: Invalid input");//means maybe 1 of them atleast is negative 
+
+
+                }
+                catch (Exception ex)
+                { Console.WriteLine("ERROR: Invalid input"); }
+            }
+
+
+
+
+
 
 
 
