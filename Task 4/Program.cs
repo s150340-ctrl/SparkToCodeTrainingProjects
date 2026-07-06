@@ -107,6 +107,42 @@
             DisplayMenu();
 
 
+            //Task 5 - Even or Odd Function
+            Console.WriteLine();
+            Console.WriteLine("Task 5 - Even or Odd Function");
+            Console.WriteLine();
+
+            //function to check even or odd
+            bool IsEven(int n)
+            {
+                if (n %2 == 0) return true;
+                return false;//else it will return false
+            }
+
+            //now we ask user for a number
+            while (true)
+            {
+                try
+                {
+                    Console.Write("Enter a number(int):");
+                    int number5 = Convert.ToInt32(Console.ReadLine());
+                    bool check = IsEven(number5); // checks value
+                    if (check) { Console.WriteLine("number is even "); }
+                    else
+                    {
+                        Console.WriteLine("number is odd");
+                    }
+
+
+                    break; //leave loop
+                }
+                catch (Exception ex)
+                { Console.WriteLine("ERROR: Invalid input"); }
+            }
+
+
+
+
         }
     }
 }
