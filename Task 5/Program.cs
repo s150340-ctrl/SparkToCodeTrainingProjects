@@ -465,6 +465,89 @@
             double finalAvg = CalculateAverage(grades9);
             Console.WriteLine("The average is :" + finalAvg);
 
+            //Task 10 - Print Queue Manager
+
+
+            Console.WriteLine();
+            Console.WriteLine("Task 10 - Print Queue Manager");
+            Console.WriteLine();
+            //make function to remove the job
+
+            Queue<string> RemoveJob (Queue<string> n, string job)
+            {
+                //this is the new  Queue<string>
+                Queue<string> newList = new Queue<string>();
+                string item = "";
+                for (int i = 0; i < n.Count; i++) {
+                    item = n.Dequeue().ToLower();
+                    if (item != job.ToLower()) {
+                        newList.Enqueue(item); }
+                    //else we wont add
+                
+                    
+                
+                }
+                return newList;
+
+            }
+            //now we set our QUEUE   
+            Queue<string> jobManagerOld = new Queue<string>();
+            //read from user
+
+            Console.WriteLine("------------------");
+            Console.WriteLine("Add the jobs to track them in Manager, when done type 'done'");
+            Console.WriteLine("------------------");
+            int counts10 = 1;
+            string job = "";
+            string jobCancel = "";
+            while (true)
+            {
+                try
+                {
+                    Console.Write("Your " + counts10 + " job :");
+                    job = Console.ReadLine().ToLower();
+                    if (job == "done")
+                    {
+                        //leave loop
+                        break;
+                    }
+                    else
+                    {
+                        jobManagerOld.Enqueue(job);
+                    }
+                    while (true)
+                    {
+                        //ask for job to cancel
+                        Console.Write("Enter the job you want to cancel :");
+                        jobCancel = Console.ReadLine().ToLower();
+                        //leave loop
+                        break;
+
+
+                    }
+
+
+
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("Error invalid input.Try again.");
+
+
+                }
+                //now we print
+                Queue<string> jobManagerNew = RemoveJob(jobManagerOld, jobCancel);
+                Console.WriteLine("List of jobs before:");
+                foreach (string x in jobManagerOld)
+                {
+                    Console.WriteLine(x);
+                }
+                Console.WriteLine("List of jobs after cancellation:");
+                foreach (string x in jobManagerNew)
+                {
+                    Console.WriteLine(x);
+                }
+            }
 
 
 
