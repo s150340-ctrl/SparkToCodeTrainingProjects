@@ -288,6 +288,49 @@
 
                 }
             }
+            //Task 7 - High Score Podium
+
+            Console.WriteLine();
+            Console.WriteLine("Task 7 - High Score Podium");
+            Console.WriteLine();
+            //make list for scores
+            List<int> scores = new List<int>();
+            int score = 0;
+            //read from user
+            while (true)
+            {
+                try
+                {
+                    Console.WriteLine("Enter 5 game scores:");
+                    for (int i = 0; i < 5; i++)
+                    {
+                        Console.Write("Enter your " + (i + 1) + " score:");
+                         score =int.Parse( Console.ReadLine());
+                        //add score to list
+                        scores.Add(score);
+
+
+
+                    }
+                    //after we sort 
+                    scores.Sort();
+                    scores.Reverse();
+                    //print top 3
+                    Console.WriteLine("1st place: " + scores[0]);
+                    Console.WriteLine("2nd place: " + scores[1]);
+                    Console.WriteLine("3rd place: " + scores[2]);
+
+                    //leave loop
+                    break;
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("Error invalid input.Try again.");
+
+
+                }
+            }
+
 
 
         }
