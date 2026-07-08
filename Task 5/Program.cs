@@ -77,6 +77,44 @@
 
                 }
             }
+            //Task 3 - Browsing History Stack
+
+            Console.WriteLine();
+            Console.WriteLine("Task 3 - Browsing History Stack");
+            Console.WriteLine();
+            //create stack
+            Stack<string> history = new Stack<string>();
+            string page = "";
+            //read from user
+            while (true)
+            {
+                try
+                {
+                    Console.WriteLine("Enter 3 webstie URL:");
+                    for (int i = 0; i < 3; i++)
+                    {
+                        Console.Write("Enter your " + (i + 1) + " website URL:");
+                        page = Console.ReadLine();
+                        //add URL to stack
+                        history.Push(page);
+
+
+
+                    }
+                    //after we print 
+                    Console.WriteLine("Your previous tab is: "+history.Pop());
+                    
+                  
+                    //leave loop
+                    break;
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("Error invalid input.Try again.");
+
+
+                }
+            }
 
         }
     }
