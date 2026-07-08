@@ -35,6 +35,49 @@
 
                 }
             }
+            //Task 2 - Dynamic To-Do List
+
+            Console.WriteLine();
+            Console.WriteLine("Task 2 - Dynamic To-Do List");
+            Console.WriteLine();
+            //create list
+            List<string> toDoList = new List<string>();
+            string task = "";
+            //read from user
+            while (true)
+            {
+                try
+                {
+                    Console.WriteLine("Enter 5 tasks:");
+                    for (int i = 0; i < 5; i++)
+                    {
+                        Console.Write("Enter your " + (i+1)+" task:");
+                        task = Console.ReadLine();
+                        //add task to list
+                        toDoList.Add(task);
+
+
+
+                    }
+                    //after we print 
+                    Console.WriteLine("Your tasks are:");
+                    int counter = 1;
+                    foreach (string x in toDoList)
+                    {
+                        Console.WriteLine(counter +") "+ x);
+                        counter++;
+                    }
+                    //leave loop
+                    break;
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("Error invalid input.Try again.");
+
+
+                }
+            }
+
         }
     }
 }
