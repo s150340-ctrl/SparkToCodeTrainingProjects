@@ -19,6 +19,12 @@
                     {
                         Console.Write("Enter your grades:");
                         grades[i] =int.Parse(Console.ReadLine());
+                        if (grades[i] <= 0)// checks it once at least
+                        {
+                            Console.WriteLine("the grade value is invalid.Enter it again.");
+                            Console.Write("Enter your grade again:");
+                            grades[i] = int.Parse(Console.ReadLine());
+                        }
                     }
                     //after we print 
                     Console.WriteLine("Your grades are:");
@@ -155,6 +161,62 @@
 
                 }
             }
+
+            //Task 5 - Array Grade Range
+
+            Console.WriteLine();
+            Console.WriteLine("Task 5 - Array Grade Range");
+            Console.WriteLine();
+            //set an array
+            int[] grades5 = new int[5];
+            //read from user
+            while (true)
+            {
+                try
+                {
+                    for (int i = 0; i < grades5.Length; i++)
+                    {
+                        Console.Write("Enter your grades:");
+                        grades5[i] = int.Parse(Console.ReadLine());
+                        if (grades5[i] <= 0)// checks it once at least
+                        {
+                            Console.WriteLine("the grade value is invalid.Enter it again.");
+                            Console.Write("Enter your grade again:");
+                            grades5[i] = int.Parse(Console.ReadLine());
+                        }
+                    }
+                    //sort array
+                    grades5.Sort();
+                    ///get average grade
+                    int total =  0;
+                    for (int i = 0; i < grades5.Length; i++)
+                    {
+
+                        total += grades5[i];
+                    }
+                    double average = total / 5;//get average
+                    //print all
+                    Console.WriteLine("The highest grade :" + grades5[4]);
+                    Console.WriteLine("The lowest grade :" + grades5[0]);
+                    Console.WriteLine("The average of all grades :" + average);
+
+
+                    //leave loop
+                    break;
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("Error invalid input.Try again.");
+
+
+                }
+            }
+
+            //Task 6 - Filtered Shopping List
+
+            Console.WriteLine();
+            Console.WriteLine("Task 6 - Filtered Shopping List");
+            Console.WriteLine();
 
         }
     }
