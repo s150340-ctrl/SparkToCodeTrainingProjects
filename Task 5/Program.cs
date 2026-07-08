@@ -148,7 +148,7 @@
 
                     }
                     //after we print 
-                    Console.WriteLine(" The first customer to be served is: " + customers.Dequeue());
+                    Console.WriteLine("The first customer to be served is: " + customers.Dequeue());
 
 
                     //leave loop
@@ -231,6 +231,7 @@
                 try
                 {
                     Console.Write("Your " + count + " item :");
+                    count++;
                     item =Console.ReadLine().ToLower();
                     if (item == "done")
                     {
@@ -257,17 +258,17 @@
             {
                 try
                 {
-                    Console.Write("Give me an item to remove");
+                    Console.Write("Give me an item to remove: ");
                     string remove = Console.ReadLine().ToLower();
                     //print before and after
-                    Console.WriteLine("Shopping List before");
+                    Console.WriteLine("Shopping List before: ");
                     foreach (string d in shoppingList) {
 
                         Console.WriteLine(d);//prints elements
                     
                     }
                     shoppingList.Remove(remove);
-                    Console.WriteLine("Shopping List after");
+                    Console.WriteLine("Shopping List after: ");
                     foreach (string d in shoppingList)
                     {
 
@@ -351,6 +352,7 @@
                 try
                 {
                     Console.Write("Your " + counts + " action :");
+                    counts++;
                     action = Console.ReadLine().ToLower();
                     if (action == "stop")
                     {
@@ -387,13 +389,13 @@
 
 
             Console.WriteLine();
-            Console.WriteLine("Task 9 - Grade Analyzer with Functions\r\n");
+            Console.WriteLine("Task 9 - Grade Analyzer with Functions");
             Console.WriteLine();
 
             //two functions
             double CalculateAverage(List<int> n)
             {
-                int total = 0;
+                double total = 0;
                 foreach(int i in n)
                 {
                     total += i;
@@ -478,7 +480,7 @@
                 //this is the new  Queue<string>
                 Queue<string> newList = new Queue<string>();
                 string item = "";
-                for (int i = 0; i < n.Count; i++) {
+               while( n.Count() > 0 ) {
                     item = n.Dequeue().ToLower();
                     if (item != job.ToLower()) {
                         newList.Enqueue(item); }
@@ -505,6 +507,7 @@
                 try
                 {
                     Console.Write("Your " + counts10 + " job :");
+                    counts10++;
                     job = Console.ReadLine().ToLower();
                     if (job == "done")
                     {
@@ -515,16 +518,29 @@
                     {
                         jobManagerOld.Enqueue(job);
                     }
-                    while (true)
-                    {
-                        //ask for job to cancel
-                        Console.Write("Enter the job you want to cancel :");
-                        jobCancel = Console.ReadLine().ToLower();
-                        //leave loop
-                        break;
 
 
-                    }
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("Error invalid input.Try again.");
+
+
+                }
+            }
+            //read job to be cancelled
+            while (true)
+            {
+                try
+                {
+                    //ask for job to cancel
+                    Console.Write("Enter the job you want to cancel :");
+                    jobCancel = Console.ReadLine().ToLower();
+                    //leave loop
+                    break;
+
+
+
 
 
 
@@ -535,19 +551,22 @@
 
 
                 }
-                //now we print
-                Queue<string> jobManagerNew = RemoveJob(jobManagerOld, jobCancel);
-                Console.WriteLine("List of jobs before:");
-                foreach (string x in jobManagerOld)
-                {
-                    Console.WriteLine(x);
-                }
-                Console.WriteLine("List of jobs after cancellation:");
-                foreach (string x in jobManagerNew)
-                {
-                    Console.WriteLine(x);
-                }
             }
+            //now we print
+           
+            Console.WriteLine("List of jobs before:");
+            foreach (string x in jobManagerOld)
+            {
+                Console.WriteLine(x);
+            }
+            Queue<string> jobManagerNew = RemoveJob(jobManagerOld, jobCancel);//changed order
+            Console.WriteLine("List of jobs after cancellation:");
+            foreach (string x in jobManagerNew)
+            {
+                Console.WriteLine(x);
+            }
+
+
 
 
 
