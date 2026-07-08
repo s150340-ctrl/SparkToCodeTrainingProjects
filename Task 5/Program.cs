@@ -383,6 +383,90 @@
             }
 
 
+            //Task 9 - Grade Analyzer with Functions
+
+
+            Console.WriteLine();
+            Console.WriteLine("Task 9 - Grade Analyzer with Functions\r\n");
+            Console.WriteLine();
+
+            //two functions
+            double CalculateAverage(List<int> n)
+            {
+                int total = 0;
+                foreach(int i in n)
+                {
+                    total += i;
+                }
+                return total /n.Count;
+            }
+
+            int FindFirstFailing(List<int> n)
+            {
+                foreach (int i in n)
+                {
+                    if (i < 60)
+                    {
+                        return i;
+                    }
+                }
+                return 0; // in case no value in list less than 60
+            }
+            //now we ask user
+            int amount = 0;
+            int grade9 = 0;
+
+            //make list for grade scores
+            List<int> grades9 = new List<int>();
+            while (true)
+            {
+                try
+                {
+                    Console.Write("How many grades you want to enter:");
+                    amount = int.Parse(Console.ReadLine());
+                    if (amount >0)//ask again if amount is less than 0
+                    {
+                        //loop for all the grades
+                        for (int i = 0; i < amount; i++)
+                        {
+                            Console.Write("Enter your " + (i + 1) + " grade:");
+                            grade9 = int.Parse(Console.ReadLine());
+                            //add score to list
+                            grades9.Add(grade9);
+
+
+
+                        }
+
+                        //leave loop
+                        break;
+                    }
+                    
+
+
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("Error invalid input.Try again.");
+
+
+                }
+            }
+            //here we will print results 
+            int lowGrade = FindFirstFailing(grades9);
+            if(lowGrade == 0)
+            {
+                Console.WriteLine("There is no failing grade.");
+            }
+            else
+            {
+                Console.WriteLine("The first failing grade is :" + lowGrade);
+            }
+            double finalAvg = CalculateAverage(grades9);
+            Console.WriteLine("The average is :" + finalAvg);
+
+
+
 
 
 
