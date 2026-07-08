@@ -331,6 +331,59 @@
                 }
             }
 
+            //Task 8 - Undo Last Action
+
+            Console.WriteLine();
+            Console.WriteLine("Task 8 - Undo Last Action");
+            Console.WriteLine();
+
+            //create stack
+            Stack<string> actions = new Stack<string>();
+            //ask user until they  type done
+            //print menu 
+            Console.WriteLine("------------------");
+            Console.WriteLine("Add the actions to track them in editor, when done type 'stop'");
+            Console.WriteLine("------------------");
+            int counts = 1;
+            string action = "";
+            while (true)
+            {
+                try
+                {
+                    Console.Write("Your " + counts + " action :");
+                    action = Console.ReadLine().ToLower();
+                    if (action == "stop")
+                    {
+                        //leave loop
+                        break;
+                    }
+                    else
+                    {
+                        actions.Push(action);
+                    }
+
+
+
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("Error invalid input.Try again.");
+
+
+                }
+            }
+            //pressing "undo" twice
+            Console.WriteLine("1st undo :"+ actions.Pop());
+            Console.WriteLine("2nd undo :"+ actions.Pop());
+            //printing rest 
+            Console.WriteLine("what's left in stack :");
+            foreach (string c in actions)
+            {
+                Console.WriteLine(c);
+            }
+
+
+
 
 
         }
