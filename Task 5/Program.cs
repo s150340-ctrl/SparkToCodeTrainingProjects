@@ -115,6 +115,46 @@
 
                 }
             }
+            //Task 4 - Customer Service Queue
+
+            Console.WriteLine();
+            Console.WriteLine("Task 4 - Customer Service Queue");
+            Console.WriteLine();
+            //create Queue
+            Queue<string> customers = new Queue<string>();
+            string customer = "";
+            //read from user
+            while (true)
+            {
+                try
+                {
+                    Console.WriteLine("Enter 3 Customer names:");
+                    for (int i = 0; i < 3; i++)
+                    {
+                        Console.Write("Enter your " + (i + 1) + "  Customer name:");
+                        customer = Console.ReadLine();
+                        //add customer to queue
+                        customers.Enqueue(customer);
+
+
+
+
+
+                    }
+                    //after we print 
+                    Console.WriteLine(" The first customer to be served is: " + customers.Dequeue());
+
+
+                    //leave loop
+                    break;
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("Error invalid input.Try again.");
+
+
+                }
+            }
 
         }
     }
