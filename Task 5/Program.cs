@@ -217,6 +217,78 @@
             Console.WriteLine();
             Console.WriteLine("Task 6 - Filtered Shopping List");
             Console.WriteLine();
+            //create shopping list
+            List<string> shoppingList = new List<string>();
+            //ask user until they  type done
+            //print menu 
+            Console.WriteLine("------------------");
+            Console.WriteLine("Add the items to shopping list, when done type 'done'");
+            Console.WriteLine("------------------");
+            int count = 1;
+            string item = "";
+            while (true)
+            {
+                try
+                {
+                    Console.Write("Your " + count + " item :");
+                    item =Console.ReadLine().ToLower();
+                    if (item == "done")
+                    {
+                        //leave loop
+                        break;
+                    }
+                    else
+                    {
+                        shoppingList.Add(item);
+                    }
+
+
+     
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("Error invalid input.Try again.");
+
+
+                }
+            }
+            //ask for an item to remove 
+            while (true)
+            {
+                try
+                {
+                    Console.Write("Give me an item to remove");
+                    string remove = Console.ReadLine().ToLower();
+                    //print before and after
+                    Console.WriteLine("Shopping List before");
+                    foreach (string d in shoppingList) {
+
+                        Console.WriteLine(d);//prints elements
+                    
+                    }
+                    shoppingList.Remove(remove);
+                    Console.WriteLine("Shopping List after");
+                    foreach (string d in shoppingList)
+                    {
+
+                        Console.WriteLine(d);//prints elements
+
+                    }
+                    //leave loop
+                    break;
+
+
+
+
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("Error invalid input.Try again.");
+
+
+                }
+            }
+
 
         }
     }
