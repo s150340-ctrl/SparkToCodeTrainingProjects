@@ -1,4 +1,5 @@
 <Solution>
+  <Project Path="BankingSystemApp/BankingSystemApp.csproj" Id="014e7880-84f9-4cdf-b404-3fa0edfbd547" />
   <Project Path="First15Tasks/First15Tasks.csproj" />
   <Project Path="FirstCSharpProject/FirstCSharpProject.csproj" />
   <Project Path="Task 2/Task 2.csproj" Id="e1c76397-27b7-40da-ab15-5a02015db260" />
