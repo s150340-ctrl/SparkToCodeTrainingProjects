@@ -360,7 +360,7 @@ namespace BankingSystemApp
                                 indexAccountSend = i;
                                 accountCheckSend = false;
                             }
-                            if (accountNumbers[i] == senderNum)
+                            if (accountNumbers[i] == receiverNum)
                             {
                                 indexAccountRec = i;
                                 accountCheckRec = false;
