@@ -124,10 +124,10 @@ namespace Task_6
         static void Main(string[] args)
         {
 
-            
-           
-           
-           
+
+
+
+
 
 
             //main menu
@@ -226,7 +226,7 @@ namespace Task_6
             {
                 return b1;
 
-            }if (choice == 2) { return b2; }
+            } if (choice == 2) { return b2; }
             //else
             return null;
 
@@ -280,7 +280,7 @@ namespace Task_6
 
 
         }
-      
+
 
         static void ViewAccountDetails()
         {
@@ -341,7 +341,7 @@ namespace Task_6
                         Student stu2 = ReturnStudent(2);
                         //get details
                         stu2.Address = address;
-                        Console.Write("Your new Address :"+ address);
+                        Console.Write("Your new Address :" + address);
 
 
                         break;
@@ -377,7 +377,7 @@ namespace Task_6
                         //get details
                         bank1.Deposit(amount);
                         bank1.CheckBalance();
-                      
+
 
 
 
@@ -462,7 +462,7 @@ namespace Task_6
                         Product pro1 = ReturnProduct(1);
                         //get details
                         pro1.GetInventoryValue();
-                       
+
                         break;
                     case 2:
                         Product pro2 = ReturnProduct(2);
@@ -555,6 +555,53 @@ namespace Task_6
 
 
         }
-         
-        static
-}
+
+        static void RestockProduct()
+        {
+            try
+            { //ask user 
+                Console.Write("choose 1 or 2 :");
+                int choice = int.Parse(Console.ReadLine());
+                Console.Write("Enter quantity for product :");
+                int quantity = int.Parse(Console.ReadLine());
+                
+                switch (choice)
+                {
+                    case 1:
+                        Product pro1 = ReturnProduct(1);
+                        //get details
+                        pro1.Restock(quantity);
+                        //check stockQuantity lvl
+                        double stock = pro1.StockQuantity;
+                        if (stock < 10) { Console.WriteLine("Low stock"); }
+                        else if ((stock >=10) && (stock <= 49)) { Console.WriteLine("Moderate stock"); }
+                        else { Console.WriteLine("Well Stocked"); }
+                        break;
+                    case 2:
+                        Product pro2 = ReturnProduct(2);
+                        //get details
+                        pro2.Restock(quantity);
+                        //check stockQuantity lvl
+                        double stock2 = pro2.StockQuantity;
+                        if (stock2 < 10) { Console.WriteLine("Low stock"); }
+                        else if ((stock2>= 10) && (stock2 <= 49)) { Console.WriteLine("Moderate stock"); }
+                        else { Console.WriteLine("Well Stocked"); }
+
+                        break;
+                    default:
+                        Console.WriteLine("Error: please enter a valid choice");
+                        break;
+
+
+
+
+
+
+                }
+
+            }
+            catch (Exception ex) { Console.WriteLine("ERROR: invalid input"); }
+
+
+        }
+    }
