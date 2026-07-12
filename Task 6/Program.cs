@@ -57,7 +57,8 @@ namespace Task_6
 
         }
     }
-    public class Product {
+    public class Product
+    {
         public string ProductName { get; set; }
         public double Price { get; set; }
         public int StockQuantity { get; set; }
@@ -66,7 +67,7 @@ namespace Task_6
         {
             if (quantity <= StockQuantity)
             {
-                StockQuantity-=quantity;
+                StockQuantity -= quantity;
                 LogTransaction();
             }
             else
@@ -226,7 +227,8 @@ namespace Task_6
             {
                 return b1;
 
-            } if (choice == 2) { return b2; }
+            }
+            if (choice == 2) { return b2; }
             //else
             return null;
 
@@ -289,7 +291,8 @@ namespace Task_6
                 Console.Write("choose 1 or 2 :");
                 int choice = int.Parse(Console.ReadLine());
 
-                switch (choice) {
+                switch (choice)
+                {
                     case 1:
                         BankAccount acc1 = ReturnBank(1);
                         //get details
@@ -564,7 +567,7 @@ namespace Task_6
                 int choice = int.Parse(Console.ReadLine());
                 Console.Write("Enter quantity for product :");
                 int quantity = int.Parse(Console.ReadLine());
-                
+
                 switch (choice)
                 {
                     case 1:
@@ -574,7 +577,7 @@ namespace Task_6
                         //check stockQuantity lvl
                         double stock = pro1.StockQuantity;
                         if (stock < 10) { Console.WriteLine("Low stock"); }
-                        else if ((stock >=10) && (stock <= 49)) { Console.WriteLine("Moderate stock"); }
+                        else if ((stock >= 10) && (stock <= 49)) { Console.WriteLine("Moderate stock"); }
                         else { Console.WriteLine("Well Stocked"); }
                         break;
                     case 2:
@@ -584,7 +587,7 @@ namespace Task_6
                         //check stockQuantity lvl
                         double stock2 = pro2.StockQuantity;
                         if (stock2 < 10) { Console.WriteLine("Low stock"); }
-                        else if ((stock2>= 10) && (stock2 <= 49)) { Console.WriteLine("Moderate stock"); }
+                        else if ((stock2 >= 10) && (stock2 <= 49)) { Console.WriteLine("Moderate stock"); }
                         else { Console.WriteLine("Well Stocked"); }
 
                         break;
@@ -619,7 +622,7 @@ namespace Task_6
                         BankAccount bank1Source = ReturnBank(1);
                         BankAccount bank2Final = ReturnBank(2);
                         //here we will check balance
-                        if (amount<= bank1Source.Balance)
+                        if (amount <= bank1Source.Balance)
                         {
                             //we can transfer
                             bank1Source.Withdraw(amount);
@@ -631,8 +634,8 @@ namespace Task_6
                             Console.WriteLine("Error: failure to transfer");
 
                         }
-                 
-                       
+
+
 
 
 
@@ -682,9 +685,10 @@ namespace Task_6
                 Console.Write("Please Enter a grade:");
                 int grade = int.Parse(Console.ReadLine());
 
-                
-                
-                if ((grade >= 0) && (grade <= 100)) { //valid grade
+
+
+                if ((grade >= 0) && (grade <= 100))
+                { //valid grade
 
                     switch (choice)
                     {
@@ -693,7 +697,7 @@ namespace Task_6
 
                             //get details
                             stu1.Grade = grade;
-                           
+
 
 
 
@@ -721,7 +725,7 @@ namespace Task_6
 
 
 
-            
+
 
             }
             catch (Exception ex) { Console.WriteLine("ERROR: invalid input"); }
@@ -729,4 +733,67 @@ namespace Task_6
 
 
         }
+        static void StudentReportCard()
+        {
+            try
+            { //ask user 
+                Console.Write("choose 1 or 2 :");
+                int choice = int.Parse(Console.ReadLine());
+                string stat = "";
+
+                switch (choice)
+                {
+                    case 1:
+                        Student stu1 = ReturnStudent(1);
+                        if (stu1.Grade >= 60)
+                        {
+                            stat = "Pass";
+                        }
+                        else
+                        {
+                            stat = "Fail";
+                           
+                        }
+                        //print formatted output
+                        Console.WriteLine("Name: " + stu1.Name);
+                        Console.WriteLine("Address: " + stu1.Address);
+                        Console.WriteLine("Grade: " + stu1.Grade);
+                        Console.WriteLine("Status: " + stat);
+
+
+
+                        break;
+                    case 2:
+                        Student stu2 = ReturnStudent(2);
+                        if (stu2.Grade >= 60)
+                        {
+                            stat = "Pass";
+                        }
+                        else
+                        {
+                            stat = "Fail";
+                        }
+                        //print formatted output
+                        Console.WriteLine("Name: " + stu2.Name);
+                        Console.WriteLine("Address: " + stu2.Address);
+                        Console.WriteLine("Grade: " + stu2.Grade);
+                        Console.WriteLine("Status: " + stat);
+
+
+                        break;
+                    default:
+                        Console.WriteLine("Error: please enter a valid choice");
+                        break;
+                }
+
+
+
+
+            }
+            catch (Exception ex) { Console.WriteLine("ERROR: invalid input"); }
+
+
+        }
     }
+}
+
