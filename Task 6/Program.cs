@@ -485,6 +485,51 @@ namespace Task_6
             catch (Exception ex) { Console.WriteLine("ERROR: invalid input"); }
 
         }
+        static void RegisterStudent()
+        {
+            try
+            { //ask user 
+                Console.Write("choose 1 or 2 :");
+                int choice = int.Parse(Console.ReadLine());
+                Console.Write("Please Enter an email:");
+                string email = Console.ReadLine();
+
+                switch (choice)
+                {
+                    case 1:
+                        Student stu1 = ReturnStudent(1);
+                        //get details
+                        stu1.Register(email);
+                        Console.Write("Your new Email has been set!");
+
+
+
+                        break;
+                    case 2:
+                        Student stu2 = ReturnStudent(2);
+                        //get details
+                        stu2.Register(email);
+                        Console.Write("Your new Email has been set!");
+
+
+                        break;
+                    default:
+                        Console.WriteLine("Error: please enter a valid choice");
+                        break;
+
+
+
+
+
+
+                }
+
+            }
+            catch (Exception ex) { Console.WriteLine("ERROR: invalid input"); }
+
+
+
+        }
 
 
 
