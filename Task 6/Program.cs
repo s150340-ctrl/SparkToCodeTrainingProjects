@@ -530,9 +530,31 @@ namespace Task_6
 
 
         }
+        static void CompareAccountBalances()
+        {
+            //first we get the objects from other method
+            BankAccount bank1 = ReturnBank(1);
+            BankAccount bank2 = ReturnBank(2);///even if name is repeated bec its a local variable name it doesnt matter
+            //now we gte both thier balances
+            double balance1 = bank1.Balance;
+            double balance2 = bank2.Balance;
+            if (balance1 == balance2)
+            {
+                Console.WriteLine("The balances are equal");
+
+            }
+            else if (balance1 < balance2)
+            {
+                Console.WriteLine("The balance in accoount : " + bank2.HolderName + " is greater");
+            }
+            else
+            {
+                Console.WriteLine("The balance in accoount : " + bank1.HolderName + " is greater");
+            }
 
 
 
-
-    }
+        }
+         
+        static
 }
