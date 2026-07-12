@@ -449,6 +449,42 @@ namespace Task_6
             catch (Exception ex) { Console.WriteLine("ERROR: invalid input"); }
 
         }
+        static void ViewProductDetails()
+        {
+            try
+            { //ask user 
+                Console.Write("choose 1 or 2 :");
+                int choice = int.Parse(Console.ReadLine());
+
+                switch (choice)
+                {
+                    case 1:
+                        Product pro1 = ReturnProduct(1);
+                        //get details
+                        pro1.GetInventoryValue();
+                       
+                        break;
+                    case 2:
+                        Product pro2 = ReturnProduct(2);
+                        //get details
+                        pro2.GetInventoryValue();
+
+                        break;
+                    default:
+                        Console.WriteLine("Error: please enter a valid choice");
+                        break;
+
+
+
+
+
+
+                }
+
+            }
+            catch (Exception ex) { Console.WriteLine("ERROR: invalid input"); }
+
+        }
 
 
 
