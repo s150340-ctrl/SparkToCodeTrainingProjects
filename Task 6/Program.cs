@@ -405,6 +405,50 @@ namespace Task_6
             catch (Exception ex) { Console.WriteLine("ERROR: invalid input"); }
 
         }
+        static void MakeWithdrawal()
+        {
+            try
+            { //ask user 
+                Console.Write("choose 1 or 2 :");
+                int choice = int.Parse(Console.ReadLine());
+                Console.Write("Please Enter an amount to deposit:");
+                double amount = double.Parse(Console.ReadLine());
+
+                switch (choice)
+                {
+                    case 1:
+                        BankAccount bank1 = ReturnBank(1);
+                        //get details
+                        bank1.Withdraw(amount);
+                        bank1.CheckBalance();
+
+
+
+
+                        break;
+                    case 2:
+                        BankAccount bank2 = ReturnBank(2);
+                        //get details
+                        bank2.Withdraw(amount);
+                        bank2.CheckBalance();
+
+
+                        break;
+                    default:
+                        Console.WriteLine("Error: please enter a valid choice");
+                        break;
+
+
+
+
+
+
+                }
+
+            }
+            catch (Exception ex) { Console.WriteLine("ERROR: invalid input"); }
+
+        }
 
 
 
