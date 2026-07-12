@@ -604,4 +604,77 @@ namespace Task_6
 
 
         }
+        static void TransferBetweenAccounts()
+        {
+            try
+            { //ask user 
+                Console.Write("choose 1 or 2 as a Source account(the other account will be the destination) :");
+                int source = int.Parse(Console.ReadLine());
+                Console.Write("Please Enter an amount to transfer:");
+                double amount = double.Parse(Console.ReadLine());
+
+                switch (source)
+                {
+                    case 1:
+                        BankAccount bank1Source = ReturnBank(1);
+                        BankAccount bank2Final = ReturnBank(2);
+                        //here we will check balance
+                        if (amount<= bank1Source.Balance)
+                        {
+                            //we can transfer
+                            bank1Source.Withdraw(amount);
+                            bank2Final.Deposit(amount);
+                        }
+                        else
+                        {
+                            //we cannot transfer
+                            Console.WriteLine("Error: failure to transfer");
+
+                        }
+                 
+                       
+
+
+
+
+                        break;
+                    case 2:
+                        BankAccount bank2Source = ReturnBank(2);
+                        BankAccount bank1Final = ReturnBank(1);//final destination for amount
+                        if (amount <= bank2Source.Balance)
+                        {
+                            //we can transfer
+                            bank2Source.Withdraw(amount);
+                            bank1Final.Deposit(amount);
+
+                        }
+                        else
+                        {
+                            //we cannot transfer
+                            Console.WriteLine("Error: failure to transfer");
+
+                        }
+
+
+                        break;
+                    default:
+                        Console.WriteLine("Error: please enter a valid choice");
+                        break;
+
+
+
+
+
+
+                }
+
+            }
+            catch (Exception ex) { Console.WriteLine("ERROR: invalid input"); }
+
+
+        }
+        static void UpdateStudentGrade()
+        {
+
+        }
     }
