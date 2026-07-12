@@ -675,6 +675,58 @@ namespace Task_6
         }
         static void UpdateStudentGrade()
         {
+            try
+            { //ask user 
+                Console.Write("choose 1 or 2 :");
+                int choice = int.Parse(Console.ReadLine());
+                Console.Write("Please Enter a grade:");
+                int grade = int.Parse(Console.ReadLine());
+
+                
+                
+                if ((grade >= 0) && (grade <= 100)) { //valid grade
+
+                    switch (choice)
+                    {
+                        case 1:
+                            Student stu1 = ReturnStudent(1);
+
+                            //get details
+                            stu1.Grade = grade;
+                           
+
+
+
+                            break;
+                        case 2:
+                            Student stu2 = ReturnStudent(2);
+                            //get details
+                            stu2.Grade = grade;
+
+
+
+                            break;
+                        default:
+                            Console.WriteLine("Error: please enter a valid choice");
+                            break;
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Update grade Rejected");
+                }
+
+
+
+
+
+
+            
+
+            }
+            catch (Exception ex) { Console.WriteLine("ERROR: invalid input"); }
+
+
 
         }
     }
