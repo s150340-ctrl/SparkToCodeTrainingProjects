@@ -64,6 +64,7 @@ namespace Task_6
         public string Address { get; set; }
         private string email { get; set; }
         public static int count = 0;
+        private int Pin;
         int age { get; set; }
         //constructer
         public Student()
@@ -85,6 +86,12 @@ namespace Task_6
             Console.WriteLine(" *email notification being sent*");
 
         }
+        //write only
+        public int SetPin
+        {
+            set {  Pin = value; }
+        }
+
     }
     public class Product
     {
@@ -1155,7 +1162,43 @@ namespace Task_6
         }
         static void SetStudentSecurityPin()
         {
+            try
+            { //ask user 
+                Console.Write("choose 1 or 2 (Student):");
+                int choice = int.Parse(Console.ReadLine());
+                Student student = null;
+                int pin = 0;
+                while (Convert.ToString(pin).Length < 4)
+                {
+                    Console.Write("Enter a 4-digit PIN:");
+                    pin = int.Parse(Console.ReadLine());
+                }
 
+
+                switch (choice)
+                {
+                    case 1:
+                        student = ReturnStudent(1);
+
+                        break;
+                    case 2:
+                        student = ReturnStudent(2);
+
+                        break;
+                    default:
+                        Console.WriteLine("Error: please enter a valid choice");
+                        break;
+
+                }if (student == null) { return; }
+                else
+                {
+                    //set pin
+                    student.SetPin = pin;
+                    Console.WriteLine("Student pin has been set");
+
+                }
+            }
+            catch (Exception ex) { Console.WriteLine("Error : INVALID INPUT"); }
         }
 
     }
