@@ -997,6 +997,65 @@ namespace Task_6
 
 
         }
+        static void FullBalanceTopUpFlow()
+        {
+            try
+            { //ask user 
+                Console.Write("choose 1 or 2 :");
+                int choice = int.Parse(Console.ReadLine());
+                double amountNeeded = 0;
+                BankAccount bank = null;
+
+
+
+                double result = 0;
+
+                switch (choice)
+                {
+                    case 1:
+                         bank= ReturnBank(1);
+                       
+
+                        break;
+                    case 2:
+                         bank = ReturnBank(2);
+                       
+
+                        break;
+                    default:
+                        Console.WriteLine("Error: please enter a valid choice");
+                        break;
+
+
+                }
+                if (bank == null) { return; } //stop here if user entered invalid choice
+                else
+                {
+                    result = bank.Balance;
+                    if (result < 50)
+                    {
+                        amountNeeded = 100 - result;//how much money needed to ==100
+                        bank.Deposit(amountNeeded);
+                        //then we print
+                        Console.WriteLine("Balance before: "+ result);
+                        Console.WriteLine("Balance after: " + bank.Balance);
+
+
+                    }
+                    else
+                    {
+                        Console.WriteLine("No top-up is needed.");
+
+                    }
+                }
+
+             
+
+            }
+            catch (Exception ex) { Console.WriteLine("ERROR: invalid input"); }
+
+
+        }
     }
 }
 
