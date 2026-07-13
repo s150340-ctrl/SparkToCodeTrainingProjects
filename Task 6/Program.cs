@@ -7,6 +7,11 @@ namespace Task_6
         public int AccountNumber { get; set; }
         public string HolderName { get; set; }
         public double Balance { get; set; }
+        //defult constructer
+        public BankAccount()
+        {
+
+        }
         //Parameterized Constructor
         public BankAccount(int number, string name, double balance)
         {
@@ -16,6 +21,12 @@ namespace Task_6
 
         }
         //methods
+        public bool Overdrawn
+        {
+            get
+            { return Balance <0; }
+            
+        }
         public void Deposit(double amount)
         {
             Balance += amount;
@@ -134,18 +145,10 @@ namespace Task_6
 
 
 
-
-
-
-
     internal class Program
     {
         static void Main(string[] args)
         {
-
-
-
-
 
 
 
@@ -219,7 +222,7 @@ namespace Task_6
                 }
                 //after switch case 
                 Console.WriteLine("Please enter any key");
-                Console.Write("");
+                Console.ReadKey();
                 Console.Clear();
 
 
@@ -1100,6 +1103,61 @@ namespace Task_6
             Console.WriteLine("Total amount of Student objects: " + Student.Count());
 
         }
+        static void OverdrawnAccountCheck()
+        {
+            //read
+            try
+            { //ask user 
+                Console.Write("choose 1 or 2 :");
+                int choice = int.Parse(Console.ReadLine());
+             
+                BankAccount bank = null ;
+
+                switch (choice)
+                {
+                    case 1:
+                        bank = ReturnBank(1);
+                    
+                        break;
+                    case 2:
+                        bank = ReturnBank(2);
+                  
+                        break;
+                    default:
+                        Console.WriteLine("Error: please enter a valid choice");
+                        break;
+
+                }
+                if(bank == null)
+                {
+                    return;
+                }
+                else
+                {
+                    //we check
+                    if (bank.Overdrawn)
+                    {
+                        Console.WriteLine("The account balance is overdrawn");
+
+                    }
+                    else
+                    {
+                        Console.WriteLine("The account balance is not overdrawn");
+                    }
+
+                }
+
+            }
+            catch (Exception ex) { Console.WriteLine("ERROR: invalid input"); }
+
+
+
+        }
+        static void SetStudentSecurityPin()
+        {
+
+        }
+
     }
 }
 
