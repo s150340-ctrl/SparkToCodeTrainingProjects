@@ -7,6 +7,14 @@ namespace Task_6
         public int AccountNumber { get; set; }
         public string HolderName { get; set; }
         public double Balance { get; set; }
+        //Parameterized Constructor
+        public BankAccount(int number, string name, double balance)
+        {
+            AccountNumber = number;
+            HolderName = name;
+            Balance = balance;
+
+        }
         //methods
         public void Deposit(double amount)
         {
@@ -1054,6 +1062,26 @@ namespace Task_6
             }
             catch (Exception ex) { Console.WriteLine("ERROR: invalid input"); }
 
+
+        }
+        static void QuickAccountOpening()
+        {
+            //make an account onlu using that constructer
+            try
+            {
+                //read input
+                Console.Write("Enter account number: ");
+                int number = int.Parse(Console.ReadLine());
+                Console.Write("Enter account name: ");
+                string name = Console.ReadLine();
+                Console.Write("Enter account Balance: ");
+                double amount = double.Parse(Console.ReadLine());
+                //assign object + print detail
+                BankAccount account = new BankAccount(number, name, amount);
+                account.CheckBalance();
+
+            }
+            catch(Exception ex) { Console.WriteLine("ERROR: invalid input"); }
 
         }
     }
