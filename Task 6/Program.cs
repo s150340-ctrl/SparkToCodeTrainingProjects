@@ -52,8 +52,18 @@ namespace Task_6
         public string Name { get; set; }
         public string Address { get; set; }
         private string email { get; set; }
+        public static int count = 0;
         int age { get; set; }
+        //constructer
+        public Student()
+        {
+            count++;
+        }
         //methods
+        public static int Count()
+        {
+            return count;
+        }
         public void Register(string Email)
         {
             email = Email;
@@ -1082,6 +1092,12 @@ namespace Task_6
 
             }
             catch(Exception ex) { Console.WriteLine("ERROR: invalid input"); }
+
+        }
+        static void TotalStudentsCounter() {
+
+            //get student count
+            Console.WriteLine("Total amount of Student objects: " + Student.Count());
 
         }
     }
