@@ -794,6 +794,54 @@ namespace Task_6
 
 
         }
+        static void AccountHealthStatus()
+        {
+            try
+            { //ask user 
+                Console.Write("choose 1 or 2 :");
+                int choice = int.Parse(Console.ReadLine());
+                string stat = "";
+                double result = 0;
+
+                switch (choice)
+                {
+                    case 1:
+                        BankAccount bank1 = ReturnBank(1);
+                        //get details
+                        result =bank1.Balance;
+                 
+                        break;
+                    case 2:
+                        BankAccount bank2 = ReturnBank(2);
+                        result = bank2.Balance;
+                    
+                        break;
+                    default:
+                        Console.WriteLine("Error: please enter a valid choice");
+                        break;
+
+
+                }
+                if (result < 50)
+                {
+                    stat = "Low Balance";
+                }
+                else if ((result >= 50) && (result <= 1000))
+                {
+                    stat = "Healthy";
+                }
+                else
+                {
+                    stat = "Premium";
+
+                }
+
+                Console.WriteLine("BankAccount Status: " + stat);
+
+            }
+            catch (Exception ex) { Console.WriteLine("ERROR: invalid input"); }
+
+        }
     }
 }
 
