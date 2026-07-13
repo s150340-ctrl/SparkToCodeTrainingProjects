@@ -842,6 +842,82 @@ namespace Task_6
             catch (Exception ex) { Console.WriteLine("ERROR: invalid input"); }
 
         }
+        static void BulkSaleWithRevenue()
+        {
+            try
+            { //ask user 
+                Console.Write("choose 1 or 2 :");
+                int choice = int.Parse(Console.ReadLine());
+                int quantity = -1;
+                while (quantity <= 0)
+                {
+                    Console.Write("Enter quantity to sell :");
+                    quantity = int.Parse(Console.ReadLine());
+                }
+                double stock = 0;
+
+                switch (choice)
+                {
+                    case 1:
+                        Product pro1 = ReturnProduct(1);
+                        //get details
+                        pro1.Restock(quantity);
+                        //check stockQuantity lvl
+                        stock = pro1.StockQuantity;
+                        if(stock >= quantity)//have enough
+                        {//we sell
+                            pro1.Sell(quantity);
+                            //here we sell pro
+                            Console.WriteLine("Total revenue made from sale :" +(pro1.Price * quantity));
+
+                        }
+                        else
+                        {
+                            //we dont sell
+                            Console.WriteLine("Stock not enough need "+ (quantity - stock)+ " additional units.");
+
+
+                        }
+                   
+                        break;
+                    case 2:
+                        Product pro2 = ReturnProduct(2);
+                        //get details
+                        pro2.Restock(quantity);
+                    
+                        stock = pro2.StockQuantity;
+                        //check stockQuantity lvl
+                        stock = pro2.StockQuantity;
+                        if (stock >= quantity)//have enough
+                        {//we sell
+                            pro2.Sell(quantity);
+                            //here we sell pro
+                            Console.WriteLine("Total revenue made from sale :" + (pro2.Price * quantity));
+
+                        }
+                        else
+                        {
+                            //we dont sell
+                            Console.WriteLine("Stock not enough need " + (quantity - stock) + " additional units.");
+
+
+                        }
+
+
+                        break;
+                    default:
+                        Console.WriteLine("Error: please enter a valid choice");
+                        break;
+
+
+                }
+
+            }
+            catch (Exception ex) { Console.WriteLine("ERROR: invalid input"); }
+
+
+
+        }
     }
 }
 
