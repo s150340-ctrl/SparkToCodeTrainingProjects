@@ -154,6 +154,52 @@ namespace Task_6
 
     internal class Program
     {
+        // 1. We create the objects out here ONE TIME so changes actually save
+        static BankAccount b1 = new BankAccount(1163, "karim", 120);
+        static BankAccount b2 = new BankAccount(15203, "Ali", 63);
+
+        static Student s1 = new Student { Name = "Ali", Address = "Muscat", Grade = 65 };
+        static Student s2 = new Student { Name = "Ahmed", Address = "Muscat", Grade = 70 };
+
+        static Product p1 = new Product { ProductName = "Wireless Mouse", Price = 5.500, StockQuantity = 50 };
+        static Product p2 = new Product { ProductName = "Mechanical Keyboard", Price = 15.750, StockQuantity = 20 };
+
+        // 2. Your exact if-else logic, but returning the long-lasting objects from above
+        public static BankAccount ReturnBank(int choice)
+        {
+            if (choice == 1)
+            {
+                return b1;
+            }
+            else
+            {
+                return b2;
+            }
+        }
+
+        public static Student ReturnStudent(int choice)
+        {
+            if (choice == 1)
+            {
+                return s1;
+            }
+            else
+            {
+                return s2;
+            }
+        }
+
+        public static Product ReturnProduct(int choice)
+        {
+            if (choice == 1)
+            {
+                return p1;
+            }
+            else
+            {
+                return p2;
+            }
+        }
         static void Main(string[] args)
         {
 
@@ -239,78 +285,7 @@ namespace Task_6
 
 
         }
-        static BankAccount ReturnBank(int choice)
-        {
-            //2 bank accounts
-            BankAccount b1 = new BankAccount();
-            b1.AccountNumber = 1163;
-            b1.HolderName = "karim";
-            b1.Balance = 120;
-            //2nd bank account 
-            BankAccount b2 = new BankAccount();
-            b2.AccountNumber = 15203;
-            b2.HolderName = "Ali";
-            b2.Balance = 63;
-            if (choice == 1)
-            {
-                return b1;
-
-            }
-            if (choice == 2) { return b2; }
-            //else
-            return null;
-
-
-        }
-
-        //returns student
-        static Student ReturnStudent(int choice)
-        {
-            //2 students
-            Student s1 = new Student();
-            s1.Name = "Ali";
-            s1.Address = "Muscat";
-            s1.Grade = 65;
-            //other one
-            Student s2 = new Student();
-            s2.Name = "Ahmed";
-            s2.Address = "Muscat";
-            s2.Grade = 70;
-            if (choice == 1)
-            {
-                return s1;
-
-            }
-            if (choice == 2) { return s2; }
-            //else
-            return null;
-
-
-        }
-        static Product ReturnProduct(int choice)
-        {
-            //2 products
-            Product p1 = new Product();
-            p1.ProductName = "Wireless Mouse";
-            p1.Price = 5.500;
-            p1.StockQuantity = 50;
-            //other product
-            Product p2 = new Product();
-            p2.ProductName = "Mechanical Keyboard";
-            p2.Price = 15.750;
-            p2.StockQuantity = 20;
-            if (choice == 1)
-            {
-                return p1;
-
-            }
-            if (choice == 2) { return p2; }
-            //else
-            return null;
-
-
-        }
-
+       
 
         static void ViewAccountDetails()
         {
@@ -442,7 +417,7 @@ namespace Task_6
             { //ask user 
                 Console.Write("choose 1 or 2 :");
                 int choice = int.Parse(Console.ReadLine());
-                Console.Write("Please Enter an amount to deposit:");
+                Console.Write("Please Enter an amount to withdraw:");
                 double amount = double.Parse(Console.ReadLine());
 
                 switch (choice)
@@ -888,8 +863,8 @@ namespace Task_6
                 {
                     case 1:
                         Product pro1 = ReturnProduct(1);
-                        //get details
-                        pro1.Restock(quantity);
+                      
+                       
                         //check stockQuantity lvl
                         stock = pro1.StockQuantity;
                         if(stock >= quantity)//have enough
@@ -910,8 +885,7 @@ namespace Task_6
                         break;
                     case 2:
                         Product pro2 = ReturnProduct(2);
-                        //get details
-                        pro2.Restock(quantity);
+                       
                     
                         stock = pro2.StockQuantity;
                         //check stockQuantity lvl
