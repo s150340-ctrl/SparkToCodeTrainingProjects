@@ -918,6 +918,85 @@ namespace Task_6
 
 
         }
+        static void ScholarshipEligibilityCheck()
+        {
+            try
+            { //ask user 
+                Console.Write("choose 1 or 2 (Student):");
+                int choice = int.Parse(Console.ReadLine());
+                Student student = null; 
+             
+
+                switch (choice)
+                {
+                    case 1:
+                         student = ReturnStudent(1);
+                    
+                        break;
+                    case 2:
+                         student = ReturnStudent(2);
+                  
+                        break;
+                    default:
+                        Console.WriteLine("Error: please enter a valid choice");
+                        break;
+                }
+                if (student == null)
+                {
+                    return;//break out of function
+                }
+                else
+                {
+                    Console.Write("choose 1 or 2 (Bank account):");
+                    int choices = int.Parse(Console.ReadLine());
+                    BankAccount bankacc = null;
+
+
+                    switch (choices)
+                    {
+                        case 1:
+                            bankacc = ReturnBank(1);
+
+                            break;
+                        case 2:
+                            bankacc = ReturnBank(2);
+
+                            break;
+                        default:
+                            Console.WriteLine("Error: please enter a valid choice");
+                            break;
+                    }
+                    if(bankacc == null)
+                    {
+                        return; //break out
+                    }
+                 
+                    else
+                    {
+                        //print reason
+                        if ((bankacc.Balance >= 100) && (student.Grade >= 80))
+                        {
+                            Console.WriteLine("Eligible");
+                        } else if ((bankacc.Balance < 100) && (student.Grade <80)) {
+                            Console.WriteLine("Both conditions ");
+                        }
+                        else if (bankacc.Balance < 100)
+                        {
+                            Console.WriteLine("The balance is less than 100");
+                        } else
+                        {
+                            Console.WriteLine("The grade is less than 80");
+                        }
+                       
+                    }
+
+                }
+
+            }
+            catch (Exception ex) { Console.WriteLine("ERROR: invalid input"); }
+
+
+        }
     }
 }
 
