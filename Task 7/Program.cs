@@ -35,7 +35,40 @@
             }
             
 
-            
+        }
+        //class guest
+        public class Guest
+        {
+            public int guestId {  get; set; }
+            public string guestName { get; set; }
+            public int roomNumber {  set; get; }
+            public DateTime checkInDate { set; get; }
+            public int totalNights { set; get; }
+            //constructer
+            public Guest() { }
+            public Guest(int id , string name , int room , DateTime date, int nights)
+            {
+                guestId = id;
+                guestName = name;
+                roomNumber = room;
+                checkInDate = date;
+                totalNights = nights;
+
+            }
+            //methods
+            public void displayGuest()
+            {
+                Console.WriteLine("guest name : " + guestName);
+                Console.WriteLine("guest id : " + guestId);
+                Console.WriteLine("Checked in on : " + checkInDate);
+                Console.WriteLine("Total nights : " + totalNights);
+                Console.WriteLine("Room number : " + roomNumber);
+
+            }
+            public double calculateTotalCost(double amount)
+            {
+                return totalNights * amount;
+            }
 
         }
 
