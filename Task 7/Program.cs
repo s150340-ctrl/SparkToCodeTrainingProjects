@@ -132,8 +132,8 @@ namespace Task_7
                 switch (choice)
                 {
                     case 1: AddRoom(rooms, guests); break;
-                    case 2: RegisterGuest(rooms, guests); break;
-                    case 3: MakeDeposit(); break;
+                    case 2: RegisterGuest( guests); break;
+                    case 3: BookRoom( rooms, guests); break;
                     case 4: MakeWithdrawal(); break;
                     case 5: ViewProductDetails(); break;
                     case 6: RegisterStudent(); break;
@@ -207,7 +207,7 @@ namespace Task_7
             catch (Exception ex) { Console.WriteLine("ERROR: invalid input"); }
 
         }
-        static void RegisterGuest(List<Room> rooms, List<Guest> guests)
+        static void RegisterGuest( List<Guest> guests)
         {
             //generate a id for guest
             int number = guests.Count() +1;
@@ -251,6 +251,52 @@ namespace Task_7
             catch(Exception ex) { Console.WriteLine("ERROR: invalid input"); }
 
             
+
+        }
+        static void BookRoom(List<Room> rooms, List<Guest> guests)
+        {
+            //ask user 
+            try
+            {
+                Console.Write("Enter your ID:");
+                string id = Console.ReadLine();
+                Console.Write("Enter room number you want to book:");
+                int roomNum = Convert.ToInt32(Console.ReadLine());
+                //now we check 
+                Guest guest = guests.FirstOrDefault(g=> g.guestId == id);
+                Room roomBook = rooms.FirstOrDefault(r => r.roomNumber == roomNum);
+                if ((roomBook == null) || (guest == null)) {
+
+                    Console.WriteLine("ERROR: invalid guest ID or room number");
+
+                }
+                else
+                {
+                    if (roomBook.isAvailable == true)
+                    {
+                       //now we add the room to gets roomNumber
+                       guest.roomNumber = Convert.ToString(roomBook.roomNumber);
+                        
+                       //now we change the status of is available to false bec its booked
+                       roomBook.isAvailable = false;
+                       //now we print info
+                        guest.displayGuest();
+                        //print total cost
+                        Console.WriteLine("Total cost :"+ guest.calculateTotalCost(roomBook.pricePerNight));
+
+
+                    }
+                    else
+                    {
+                        Console.WriteLine("Room is already booked");
+                    }
+                }
+               
+
+            }
+            catch(Exception ex) 
+            {
+                Console.WriteLine("ERROR: invalid input"); }
 
         }
     }
