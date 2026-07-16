@@ -125,7 +125,7 @@ namespace Task_7
                 }
                 catch (Exception)
                 {
-                    Console.WriteLine("Invalid input. Please enter a number from 1 to 20.");
+                    Console.WriteLine("Invalid input. Please enter a number from 1 to 15.");
                     continue;
                 }
 
@@ -136,7 +136,7 @@ namespace Task_7
                     case 3: BookRoom( rooms, guests); break;
                     case 4: ViewRooms(rooms); break;
                     case 5: ViewGuests(guests); break;
-                    case 6: RegisterStudent(); break;
+                    case 6: SearchFilter(rooms); break;
                     case 7: CompareAccountBalances(); break;
                     case 8: RestockProduct(); break;
                     case 9: TransferBetweenAccounts(); break;
@@ -152,7 +152,7 @@ namespace Task_7
                         Console.WriteLine("Goodbye!");
                         break;
                     default:
-                        Console.WriteLine("Invalid option, please choose between 1 and 20.");
+                        Console.WriteLine("Invalid option, please choose between 1 and 15.");
                         break;
                 }
                 //after switch case 
@@ -342,5 +342,144 @@ namespace Task_7
                 }
             }
         }
+        static void SearchFilter(List<Room> rooms)
+        {
+            bool exitApp = false;
+
+            while (exitApp == false)
+            {
+                Console.WriteLine("================================================");
+                Console.WriteLine("Menu for Searching & Filtering Rooms");
+                Console.WriteLine("================================================");
+                Console.WriteLine(" 1. Add New Room");
+                Console.WriteLine(" 2. Register New Guest");
+                Console.WriteLine(" 3. Book a Room for a Guest");
+                Console.WriteLine(" 4. View All Rooms ");
+                Console.WriteLine(" 0. Exit");
+                Console.WriteLine("================================================");
+                Console.Write("Enter your choice: ");
+
+                int choice;
+                try
+                {
+                    choice = int.Parse(Console.ReadLine());
+                }
+                catch (Exception)
+                {
+                    Console.WriteLine("Invalid input. Please enter a number from 1 to 4.");
+                    continue;
+                }
+
+                switch (choice)
+                {
+                    case 1:
+                        //get all rooms where is avaialble is true
+                        var isAvailable = rooms.Where(r => r.isAvailable == true).ToList();
+                        if (isAvailable.Count() != 0)
+                        {
+                            isAvailable = isAvailable.OrderBy(r => r.pricePerNight).ToList();
+                            Console.WriteLine("Number of available rooms :" + isAvailable.Count());
+                            foreach (Room room in isAvailable)
+                            {
+                                room.displayRoom();
+                            }
+                        }
+                        else
+                        {
+                            Console.WriteLine("No rooms found for the selected criteria");
+                        }
+
+                        break;
+                    case 2:
+                        try
+                        {
+                            //ask user for room type
+                            string roomType = "";
+                            while ((roomType != "single") || (roomType != "double") || (roomType != "suite"))
+                            {
+                                Console.Write("Enter room type (Single / Double / Suite):");
+                                roomType = Console.ReadLine().ToLower();
+                            }
+                            //get all rooms with same type
+                            var roomTypes = rooms.Where(r => r.roomType == roomType).ToList();
+                            if (roomTypes.Count() != 0)
+                            {
+                                Console.WriteLine("Number of rooms  with similar type :" + roomTypes.Count());
+                                foreach (Room room in roomTypes)
+                                {
+                                    room.displayRoom();
+                                }
+                            }
+                            else
+                            {
+                                Console.WriteLine("No rooms found for the selected criteria");
+                            }
+
+                        }
+                        catch (Exception e) { Console.WriteLine("Invalid input"); continue; }
+
+
+                        break;
+                    case 3:
+                        //get maximum price
+                        try
+                        {
+                            //ask user for price
+                            double price = -1;
+                            while (price <= 0)
+                            {
+                                Console.Write("Enter maximum price:");
+                                price = int.Parse(Console.ReadLine());
+                            }
+                            //get all rooms with same price
+                            var roomsPriced = rooms.Where(r => r.pricePerNight <= price).ToList();
+                            if (roomsPriced.Count() != 0)
+                            {
+                                roomsPriced = roomsPriced.OrderBy(r => r.pricePerNight).ToList();
+                                Console.WriteLine("Number of rooms  with similar type :" + roomsPriced.Count());
+                                foreach (Room room in roomsPriced)
+                                {
+                                    room.displayRoom();
+                                }
+                            }
+                            else
+                            {
+                                Console.WriteLine("No rooms found for the selected criteria");
+                            }
+
+
+                        }
+                        catch (Exception e) { Console.WriteLine("Invalid input"); continue; }
+
+
+
+
+                        break;
+                    case 4:
+                        //display room info
+                        Console.WriteLine("Number of rooms :" + rooms.Count());
+                        var availableRooms = rooms.Where(r => r.isAvailable == true).ToList();
+                        Console.WriteLine("Number of available rooms :" + availableRooms.Count());
+                        Console.WriteLine("Average price of rooms :" + rooms.Average(r => r.pricePerNight));
+                        Console.WriteLine("Cheapest priced room :" + rooms.Min(r => r.pricePerNight));
+                        Console.WriteLine("Cheapest priced room :" + rooms.Max(r => r.pricePerNight));
+
+
+
+                        break;
+
+                    case 0:
+
+                        exitApp = true;
+                        Console.WriteLine("Goodbye!");
+                        break;
+                    default:
+                        Console.WriteLine("Invalid option, please choose between 1 and 4.");
+                        break;
+                }
+            }
+        }
+
+
     }
 }
