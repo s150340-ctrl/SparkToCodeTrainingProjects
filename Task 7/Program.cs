@@ -134,8 +134,8 @@ namespace Task_7
                     case 1: AddRoom(rooms, guests); break;
                     case 2: RegisterGuest( guests); break;
                     case 3: BookRoom( rooms, guests); break;
-                    case 4: MakeWithdrawal(); break;
-                    case 5: ViewProductDetails(); break;
+                    case 4: ViewRooms(rooms); break;
+                    case 5: ViewGuests(guests); break;
                     case 6: RegisterStudent(); break;
                     case 7: CompareAccountBalances(); break;
                     case 8: RestockProduct(); break;
@@ -317,6 +317,28 @@ namespace Task_7
                 var sortedRooms = rooms.OrderBy(r => r.roomNumber).ToList();
                 foreach (Room room in sortedRooms) {
                     room.displayRoom();
+                }
+            }
+        }
+        static void ViewGuests(List<Guest> guests)
+        {
+            //first we check if the list empty
+            if (guests.Count() == 0)
+            {
+                Console.WriteLine("No rooms have been added yet");
+            }
+            else
+            {
+                int amountguests = guests.Count();
+                Console.WriteLine("=====================================");
+                Console.WriteLine("Total room count :" + amountguests);
+                Console.WriteLine("=====================================");
+
+                //we make a new list that is sorted
+                var sortedGuests = guests.OrderBy(g => g.guestName).ToList();
+                foreach (Guest guest in sortedGuests)
+                {
+                    guest.displayGuest();
                 }
             }
         }
