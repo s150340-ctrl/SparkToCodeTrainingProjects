@@ -299,5 +299,26 @@ namespace Task_7
                 Console.WriteLine("ERROR: invalid input"); }
 
         }
+        static void ViewRooms(List<Room> rooms)
+        {
+            //first we check if the list empty
+            if (rooms.Count() == 0)
+            {
+                Console.WriteLine("No rooms have been added yet");
+            }
+            else
+            {
+                int amountRooms = rooms.Count();
+                Console.WriteLine("=====================================");
+                Console.WriteLine("Total room count :" + amountRooms);
+                Console.WriteLine("=====================================");
+
+                //we make a new list that is sorted
+                var sortedRooms = rooms.OrderBy(r => r.roomNumber).ToList();
+                foreach (Room room in sortedRooms) {
+                    room.displayRoom();
+                }
+            }
+        }
     }
 }
