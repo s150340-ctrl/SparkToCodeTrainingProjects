@@ -1,4 +1,6 @@
 ﻿using System.ComponentModel;
+using System.Net.NetworkInformation;
+using static Task_7.Program;
 
 namespace Task_7
 {
@@ -41,14 +43,14 @@ namespace Task_7
         //class guest
         public class Guest
         {
-            public int guestId {  get; set; }
+            public string guestId {  get; set; }
             public string guestName { get; set; }
-            public int roomNumber {  set; get; }
+            public string roomNumber { set; get; } = "Not Assigned";
             public DateTime checkInDate { set; get; }
             public int totalNights { set; get; }
             //constructer
             public Guest() { }
-            public Guest(int id , string name , int room , DateTime date, int nights)
+            public Guest(string id , string name , string room , DateTime date, int nights)
             {
                 guestId = id;
                 guestName = name;
@@ -130,7 +132,7 @@ namespace Task_7
                 switch (choice)
                 {
                     case 1: AddRoom(rooms, guests); break;
-                    case 2: UpdateStudentAddress(); break;
+                    case 2: RegisterGuest(rooms, guests); break;
                     case 3: MakeDeposit(); break;
                     case 4: MakeWithdrawal(); break;
                     case 5: ViewProductDetails(); break;
@@ -196,11 +198,59 @@ namespace Task_7
                     rooms.Add(new Room(pin,roomType ,priceNight));
                     //message for last room added
                     rooms[-1].displayRoom();
+                    Console.WriteLine("Updated room count: "+ rooms.Count);
+
 
                 }
 
             }
             catch (Exception ex) { Console.WriteLine("ERROR: invalid input"); }
+
+        }
+        static void RegisterGuest(List<Room> rooms, List<Guest> guests)
+        {
+            //generate a id for guest
+            int number = guests.Count() +1;
+            string id = "";
+            //check size 
+            if (number < 10)
+            {
+                id = "G00" + number;
+            }
+            else if ( number < 100)
+            {
+                id = "G0" + number;
+            }
+            else
+            {
+                id = "G" + number;
+            }
+            //now ask user for info
+            try
+            {
+                Console.Write("Enter your name:");
+                string name = Console.ReadLine();
+                Console.Write("Enter check-in date as(11-02-2026):");
+                DateTime date = Convert.ToDateTime(Console.ReadLine());
+                int nightsStayed = -1;
+                while (nightsStayed <= 0)
+                {
+                    Console.Write("Enter number of nights that you will stay for:");
+                    nightsStayed = Convert.ToInt32(Console.ReadLine());
+                }
+                //now we add Guest
+                Guest newGuest = new Guest();
+                newGuest.guestName = name;
+                newGuest.guestId = id;
+                newGuest.checkInDate = date;
+                newGuest.totalNights = nightsStayed;
+                guests.Add(newGuest);
+                //now we display information of guests
+                guests[-1].displayGuest();
+            }
+            catch(Exception ex) { Console.WriteLine("ERROR: invalid input"); }
+
+            
 
         }
     }
