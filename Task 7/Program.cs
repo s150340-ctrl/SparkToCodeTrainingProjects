@@ -155,7 +155,7 @@ namespace Task_7
                     case 10: RoomTypeBreakDown( rooms); break;
                     case 11: GuestCheckOut( rooms, guests); break;
                     case 12: RemoveRooms(rooms, guests); break;
-                    case 13: BulkSaleWithRevenue(); break;
+                    case 13: ExtendStay( rooms,  guests); break;
                     case 14: ScholarshipEligibilityCheck(); break;
                     case 15: FullBalanceTopUpFlow(); break;
                     case 0:
@@ -753,6 +753,69 @@ namespace Task_7
                 }
 
             }
+        }
+        static void ExtendStay(List<Room> rooms, List<Guest> guests)
+        {
+            try
+            {
+                //ask user
+                Console.Write("Enter guest ID:");
+                string id = Console.ReadLine();
+                //now we search
+                var checkOutGuest = guests.FirstOrDefault(r => r.guestId == id);
+                if (checkOutGuest == null)
+                {
+                    //guest not found
+                    Console.WriteLine("No guests matched that search");
+
+
+                }
+                else
+                {
+                    //check if guest has active booking
+                    if (checkOutGuest.roomNumber == "Not Assigned")
+                    {
+                        Console.WriteLine("This guest has no active booking to extend");
+                        return;
+                    }
+                    else
+                    {
+                        //we ask for number of nights
+                       
+                        Console.Write("Enter the number of additional nights:");
+                        int nights =int.Parse( Console.ReadLine());
+
+                        if(nights <= 0)
+                        {
+                            Console.WriteLine("ERROR: invalid input");
+                            return;
+                        }
+                        else
+                        {
+                            checkOutGuest.totalNights += nights;
+                            Console.WriteLine("Updated total nights: " + checkOutGuest.totalNights);
+                            Console.WriteLine("Updated total cost: " + checkOutGuest.calculateTotalCost(rooms));
+
+
+                        }
+
+
+
+
+
+
+                    }
+                }
+
+
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("ERROR: invalid input");
+            }
+
+
         }
     }
 }
