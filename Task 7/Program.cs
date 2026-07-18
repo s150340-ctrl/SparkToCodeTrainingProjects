@@ -150,7 +150,7 @@ namespace Task_7
                     case 5: ViewGuests(guests); break;
                     case 6: SearchFilter(rooms); break;
                     case 7: GuestBooking(rooms, guests); break;
-                    case 8: RestockProduct(); break;
+                    case 8: UpdateRoomPrice(rooms); break;
                     case 9: TransferBetweenAccounts(); break;
                     case 10: UpdateStudentGrade(); break;
                     case 11: StudentReportCard(); break;
@@ -519,6 +519,52 @@ namespace Task_7
             {
                 Console.WriteLine(line);
             }
+        }
+        static void UpdateRoomPrice(List<Room> rooms)
+        {
+            //ask user 
+            try
+            {
+              
+                Console.Write("Enter room number you want:");
+                int roomNum = Convert.ToInt32(Console.ReadLine());
+                //now we check 
+               
+                Room roomBook = rooms.FirstOrDefault(r => r.roomNumber == roomNum);
+                if ((roomBook == null))
+                {
+
+                    Console.WriteLine("ERROR: invalid room number");
+
+                }
+                else
+                {
+                    //ask for new price
+                    Console.Write("Enter room new room price:");
+                    double price = Convert.ToDouble(Console.ReadLine());
+                    if (price <= 0)
+                    {
+                        Console.WriteLine("ERROR: invalid room price");
+
+                    }
+                    else
+                    {
+                        //update price
+                        Console.WriteLine("Old price : " + roomBook.pricePerNight);
+                        roomBook.pricePerNight = price;
+                        Console.WriteLine("New price : " + roomBook.pricePerNight);
+
+                    }
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("ERROR: invalid input");
+            }
+
+
         }
     }
 }
