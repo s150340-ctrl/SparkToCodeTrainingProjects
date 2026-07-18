@@ -98,8 +98,8 @@ namespace Task_7
             rooms.Add(new Room(1238, "double", 33));
             rooms.Add(new Room(1234, "suite",50.98));
             rooms.Add(new Room(5679, "single", 13.45));
-            rooms.Add(new Room(1234, "double", 40.5));
-            rooms.Add(new Room(1234, "suite", 100.5));
+            rooms.Add(new Room(5550, "double", 40.5));
+            rooms.Add(new Room(2345, "suite", 100.5));
 
             //main loop
 
@@ -188,7 +188,7 @@ namespace Task_7
                     pin = Convert.ToInt32(Console.ReadLine());
                 }
                 string roomType = "";
-                while ((roomType != "single") || (roomType != "double") || (roomType != "suite"))
+                while ((roomType != "single") && (roomType != "double") && (roomType != "suite"))
                 {
                     Console.Write("Enter room type (Single / Double / Suite):");
                     roomType =Console.ReadLine().ToLower();
@@ -351,6 +351,7 @@ namespace Task_7
                 foreach (Guest guest in sortedGuests)
                 {
                     guest.displayGuest();
+                    Console.WriteLine("=====================================");
                 }
             }
         }
@@ -391,9 +392,13 @@ namespace Task_7
                         {
                             isAvailable = isAvailable.OrderBy(r => r.pricePerNight).ToList();
                             Console.WriteLine("Number of available rooms :" + isAvailable.Count());
+                            Console.WriteLine("=====================================");
+                            Console.WriteLine("        ALL AVAILABLE ROOMS ");
+                            Console.WriteLine("=====================================");
                             foreach (Room room in isAvailable)
                             {
                                 room.displayRoom();
+                                Console.WriteLine("=====================================");
                             }
                         }
                         else
@@ -417,9 +422,13 @@ namespace Task_7
                             if (roomTypes.Count() != 0)
                             {
                                 Console.WriteLine("Number of rooms  with similar type :" + roomTypes.Count());
+                                Console.WriteLine("=====================================");
+                                Console.WriteLine("                ROOMS ");
+                                Console.WriteLine("=====================================");
                                 foreach (Room room in roomTypes)
                                 {
                                     room.displayRoom();
+                                    Console.WriteLine("=====================================");
                                 }
                             }
                             else
@@ -448,10 +457,14 @@ namespace Task_7
                             if (roomsPriced.Count() != 0)
                             {
                                 roomsPriced = roomsPriced.OrderBy(r => r.pricePerNight).ToList();
-                                Console.WriteLine("Number of rooms  with similar type :" + roomsPriced.Count());
+                                Console.WriteLine("Number of rooms  with similar price :" + roomsPriced.Count());
+                                Console.WriteLine("=====================================");
+                                Console.WriteLine("      ROOMS WITH SIMILAR PRICE ");
+                                Console.WriteLine("=====================================");
                                 foreach (Room room in roomsPriced)
                                 {
                                     room.displayRoom();
+                                    Console.WriteLine("=====================================");
                                 }
                             }
                             else
@@ -469,12 +482,15 @@ namespace Task_7
                         break;
                     case 4:
                         //display room info
+                        Console.WriteLine("=====================================");
+                        Console.WriteLine("          ROOM STATISTICS");
+                        Console.WriteLine("=====================================");
                         Console.WriteLine("Number of rooms :" + rooms.Count());
                         var availableRooms = rooms.Where(r => r.isAvailable == true).ToList();
                         Console.WriteLine("Number of available rooms :" + availableRooms.Count());
                         Console.WriteLine("Average price of rooms :" + rooms.Average(r => r.pricePerNight));
                         Console.WriteLine("Cheapest priced room :" + rooms.Min(r => r.pricePerNight));
-                        Console.WriteLine("Cheapest priced room :" + rooms.Max(r => r.pricePerNight));
+                        Console.WriteLine("Highest priced room :" + rooms.Max(r => r.pricePerNight));
 
 
 
@@ -494,6 +510,7 @@ namespace Task_7
 
         static void GuestBooking(List<Room> rooms, List<Guest> guests)
         {
+            Console.WriteLine("=====================================");
             //case 1
             Console.WriteLine("Total guests :" + guests.Count());
             var guestNoRoom = guests.Where(r=> r.roomNumber == "Not Assigned").ToList();
@@ -507,17 +524,25 @@ namespace Task_7
             double avgPrice = ActiveGuests.Average(g => g.totalNights);
             Console.WriteLine("Average nights spent :" + avgPrice);
             //case 4
+            Console.WriteLine("=====================================");
+            Console.WriteLine("       TOP 3 HIGHEST SPENDERS  ");
+            Console.WriteLine("=====================================");
             var decOrder = guests.OrderByDescending(g=> g.calculateTotalCost(rooms)).Take(3).ToList();
             foreach(Guest r in decOrder)
             {
                 r.displayGuest();
                 Console.WriteLine("Total cost :" + r.calculateTotalCost(rooms));
+                Console.WriteLine("=====================================");
             }
             //case 5
-            var summery = guests.Select(g => $"Guest name :{g.guestName} Room number : {g.roomNumber} nights : {g.totalNights} TotalCost : {g.calculateTotalCost(rooms)}").ToList();
+            Console.WriteLine("=====================================");
+            Console.WriteLine("     Summery of all booked guests  ");
+            Console.WriteLine("=====================================");
+            var summery = guests.Select(g => $"Guest name :{g.guestName} ,Room number : {g.roomNumber} ,nights : {g.totalNights} ,TotalCost : {g.calculateTotalCost(rooms)}").ToList();
             foreach(string line in summery)
             {
                 Console.WriteLine(line);
+                Console.WriteLine("=====================================");
             }
         }
         static void UpdateRoomPrice(List<Room> rooms)
@@ -580,6 +605,7 @@ namespace Task_7
                     foreach (Guest g in matchingNames)
                     {
                         g.displayGuest();
+                        Console.WriteLine("=====================================");
                     }
 
                 }
@@ -660,6 +686,9 @@ namespace Task_7
                             string confirm = Console.ReadLine().ToLower();
                             if ((confirm == "y") || (confirm == "yes")) 
                             {
+                                Console.WriteLine("=====================================");
+                                Console.WriteLine("     Summery of checkout  ");
+                                Console.WriteLine("=====================================");
                                 roomChecked.isAvailable = true;
                                 //then we remove the guest
                                 guests.Remove(checkOutGuest);
@@ -714,6 +743,7 @@ namespace Task_7
                 foreach (var room in notGoodRooms)
                 {
                     room.displayRoom();
+                    Console.WriteLine("=====================================");
                 }
                 Console.WriteLine("number of removable roooms: "+ notGoodRooms.Count());
                 //ask manager to remove them
@@ -732,6 +762,7 @@ namespace Task_7
                         foreach(string Line in listOfRooms)
                         {
                             Console.WriteLine(Line);
+                            Console.WriteLine("=====================================");
                         }
 
 
@@ -838,6 +869,9 @@ namespace Task_7
             //we order them
             var highest = activeGuests.OrderByDescending(g => g.calculateTotalCost(rooms)).Take(1).FirstOrDefault();
             //now we display
+            Console.WriteLine("=================================");
+            Console.WriteLine("    Highest Revenue Maker");
+            Console.WriteLine("=================================");
             Console.WriteLine($"Guest name : {highest.guestName} Room number : {highest.roomNumber}, Total cost:{highest.calculateTotalCost(rooms)}");
 
         }
