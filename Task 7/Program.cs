@@ -33,7 +33,7 @@ namespace Task_7
             {
                 Console.WriteLine("Room number : " + roomNumber);
                 Console.WriteLine("Room type : " + roomType);
-                Console.WriteLine("Room price per night : " + roomType);
+                Console.WriteLine("Room price per night : " + pricePerNight);
                 Console.WriteLine("Room status (available?) : " + isAvailable);
 
             }
@@ -69,9 +69,21 @@ namespace Task_7
                 Console.WriteLine("Room number : " + roomNumber);
 
             }
-            public double calculateTotalCost(double amount)
+            public double calculateTotalCost(List<Room> rooms)
             {
-                return totalNights * amount;
+               if (roomNumber == "Not Assigned") {  return 0; }
+               //else we get the room
+               int myRoomNum = int.Parse(roomNumber);
+               Room myRoom = rooms.FirstOrDefault(r => r.roomNumber == myRoomNum);
+                if (myRoom == null) { return 0; }
+                else
+                {
+                    return myRoom.pricePerNight * totalNights;
+                }
+                
+
+
+
             }
 
         }
@@ -137,7 +149,7 @@ namespace Task_7
                     case 4: ViewRooms(rooms); break;
                     case 5: ViewGuests(guests); break;
                     case 6: SearchFilter(rooms); break;
-                    case 7: CompareAccountBalances(); break;
+                    case 7: GuestBooking(rooms, guests); break;
                     case 8: RestockProduct(); break;
                     case 9: TransferBetweenAccounts(); break;
                     case 10: UpdateStudentGrade(); break;
@@ -480,6 +492,24 @@ namespace Task_7
             }
         }
 
+        static void GuestBooking(List<Room> rooms, List<Guest> guests)
+        {
+            //case 1
+            Console.WriteLine("Total guests :" + guests.Count());
+            var guestNoRoom = guests.Where(r=> r.roomNumber == "Not Assigned").ToList();
+            Console.WriteLine("Total guests with no assigned room :" + guestNoRoom.Count());
+            //case 2
+            Console.WriteLine("Total rooms :" + rooms.Count());
+            var booked = rooms.Where(r => r.isAvailable ==false).ToList();
+            Console.WriteLine("Total rooms currently booked :" + booked.Count());
+            //case 3
+            var ActiveGuests = guests.Where(r => r.roomNumber != "Not Assigned").ToList();
+            double avgPrice = ActiveGuests.Average(g => g.totalNights);
+            Console.WriteLine("Average nights spent :" + avgPrice);
+            //case 4
+            var decOrder = 
 
+
+        }
     }
 }
