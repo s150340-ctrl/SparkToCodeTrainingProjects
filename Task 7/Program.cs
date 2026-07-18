@@ -157,7 +157,7 @@ namespace Task_7
                     case 12: RemoveRooms(rooms, guests); break;
                     case 13: ExtendStay( rooms,  guests); break;
                     case 14: HighestRevene(rooms, guests); break;
-                    case 15: FullBalanceTopUpFlow(); break;
+                    case 15: GuestViewer(guests); break;
                     case 0:
                
                         exitApp = true;
@@ -839,6 +839,50 @@ namespace Task_7
             var highest = activeGuests.OrderByDescending(g => g.calculateTotalCost(rooms)).Take(1).FirstOrDefault();
             //now we display
             Console.WriteLine($"Guest name : {highest.guestName} Room number : {highest.roomNumber}, Total cost:{highest.calculateTotalCost(rooms)}");
+
+        }
+        static void GuestViewer(List<Guest> guests)
+        {
+            int pageSize = 3;//means eachpage has 3 guests
+            int skipAmount = 0;
+            try
+            {
+                //ask user which page
+                int pageNum = -1;
+                while (pageNum <= 0)
+                {
+                    Console.Write("Enter page number:");
+                    pageNum = int.Parse(Console.ReadLine());
+                }
+                //how to know if index out of range => when list is not >= page * page size
+                int maxPages = guests.Count()/ pageSize;
+                if(guests.Count() % pageSize != 0)
+                {
+                    maxPages += 1;
+                }
+                //now we will check the range
+                if(pageNum> maxPages)
+                {
+                    Console.WriteLine("That page does not exist.");
+                    return; // we exit func
+                } 
+                skipAmount = (pageNum - 1) * pageSize;
+               //now we display 
+                var guestsOnPage = guests.Skip(skipAmount).Take(3).ToList();
+                foreach(var guest in guestsOnPage)
+                {
+                    guest.displayGuest();
+                }
+                Console.WriteLine("Current page number: " + pageNum);
+                Console.WriteLine("Total amount of pages: " + maxPages);
+
+
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("ERROR: invalid input");
+            }
 
         }
     }
