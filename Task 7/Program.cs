@@ -154,7 +154,7 @@ namespace Task_7
                     case 9: GuestLookUp( guests); break;
                     case 10: RoomTypeBreakDown( rooms); break;
                     case 11: GuestCheckOut( rooms, guests); break;
-                    case 12: AccountHealthStatus(); break;
+                    case 12: RemoveRooms(rooms, guests); break;
                     case 13: BulkSaleWithRevenue(); break;
                     case 14: ScholarshipEligibilityCheck(); break;
                     case 15: FullBalanceTopUpFlow(); break;
@@ -699,6 +699,60 @@ namespace Task_7
             }
 
 
+        }
+        static void RemoveRooms(List<Room> rooms, List<Guest> guests)
+        {
+            //identify all rooms where isAvailable is false AND no guest in the guests list currently has
+            var notGoodRooms = rooms.Where(r=> r.isAvailable ==false&& !guests.Any(g=> r.roomNumber.ToString() == g.roomNumber)).OrderBy(r=> r.roomNumber).ToList();
+            if (notGoodRooms.Count == 0)
+            {
+                Console.WriteLine("All unavailable rooms are currently occupied.No rooms can be decommissioned");
+            }
+            else
+            {
+                //display the rooms
+                foreach (var room in notGoodRooms)
+                {
+                    room.displayRoom();
+                }
+                Console.WriteLine("number of removable roooms: "+ notGoodRooms.Count());
+                //ask manager to remove them
+                try
+                {
+                    Console.Write(" confirm removal (Y/N):");
+                    string confirm = Console.ReadLine().ToLower();
+                    if ((confirm == "y") || (confirm == "yes"))
+                    {
+                        //we remove the notgood rooms
+                        rooms.RemoveAll(r => r.isAvailable == false && !guests.Any(g => r.roomNumber.ToString() == g.roomNumber));
+                        //displayroom count
+                        Console.WriteLine("Updated amount of roooms: " + rooms.Count());
+                        //now we display
+                        var listOfRooms = rooms.Select(r => $"Room Number : {r.roomNumber} Room Type : {r.roomType}").ToList();
+                        foreach(string Line in listOfRooms)
+                        {
+                            Console.WriteLine(Line);
+                        }
+
+
+                    }
+                    else if ((confirm == "n") || (confirm == "no"))
+                    {
+                        return;
+                    }
+                    else
+                    {
+                        Console.WriteLine("ERROR: invalid input");
+                    }
+
+
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("ERROR: invalid input");
+                }
+
+            }
         }
     }
 }
