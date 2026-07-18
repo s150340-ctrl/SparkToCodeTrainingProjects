@@ -153,7 +153,7 @@ namespace Task_7
                     case 8: UpdateRoomPrice(rooms); break;
                     case 9: GuestLookUp( guests); break;
                     case 10: RoomTypeBreakDown( rooms); break;
-                    case 11: StudentReportCard(); break;
+                    case 11: GuestCheckOut( rooms, guests); break;
                     case 12: AccountHealthStatus(); break;
                     case 13: BulkSaleWithRevenue(); break;
                     case 14: ScholarshipEligibilityCheck(); break;
@@ -618,6 +618,85 @@ namespace Task_7
             //average for all
             Console.WriteLine("Average price of All Rooms: " + rooms.Average(r => r.pricePerNight));
 
+
+
+        }
+        static void GuestCheckOut(List<Room> rooms, List<Guest> guests)
+        {
+            try
+            {
+                //ask user
+                Console.Write("Enter guest ID:");
+                string id = Console.ReadLine();
+                //now we search
+                var checkOutGuest = guests.FirstOrDefault(r => r.guestId == id);
+                if (checkOutGuest == null)
+                {
+                    //guest not found
+                    Console.WriteLine("No guests matched that search");
+
+
+                }
+                else
+                {
+                   //check if guest has active booking
+                   if (checkOutGuest.roomNumber == "Not Assigned")
+                    {
+                        Console.WriteLine("This guest has no active booking");
+                    }
+                    else
+                    {
+                        //we get room
+                        int roomNum = int.Parse(checkOutGuest.roomNumber);
+                        var roomChecked = rooms.FirstOrDefault(r=> r.roomNumber == roomNum);
+                        if (roomChecked != null)
+                        {
+                            //display bill 
+                            checkOutGuest.displayGuest();
+                            Console.WriteLine("Total Cost : "+ checkOutGuest.calculateTotalCost(rooms));
+                            Console.WriteLine("Price per night : " + roomChecked.pricePerNight);
+                            //then we ask clerk
+                            Console.Write("confirm checkout (Y/N):");
+                            string confirm = Console.ReadLine().ToLower();
+                            if ((confirm == "y") || (confirm == "yes")) 
+                            {
+                                roomChecked.isAvailable = true;
+                                //then we remove the guest
+                                guests.Remove(checkOutGuest);
+                                //display summery
+                                Console.WriteLine("Checked out Room id : " + id + "Name of Checked out Guest:"+ checkOutGuest.guestName+" Room number: "+roomNum);
+                                Console.WriteLine("Room count : " + rooms.Count());
+                                Console.WriteLine("Guest count : " + guests.Count());
+                                
+                                Console.WriteLine("Room is available : " + rooms.Any(r => (r.roomNumber == roomNum) && (r.isAvailable == true)));
+
+
+
+
+
+                            }
+                            else if ((confirm == "n") || (confirm == "no"))
+                            {
+                                return;
+                            }
+                            else
+                            {
+                                Console.WriteLine("ERROR: invalid input");
+                            }
+
+
+                        }
+
+                    }
+                }
+
+
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("ERROR: invalid input");
+            }
 
 
         }
