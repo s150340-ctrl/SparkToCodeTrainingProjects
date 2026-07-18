@@ -507,9 +507,18 @@ namespace Task_7
             double avgPrice = ActiveGuests.Average(g => g.totalNights);
             Console.WriteLine("Average nights spent :" + avgPrice);
             //case 4
-            var decOrder = 
-
-
+            var decOrder = guests.OrderByDescending(g=> g.calculateTotalCost(rooms)).Take(3).ToList();
+            foreach(Guest r in decOrder)
+            {
+                r.displayGuest();
+                Console.WriteLine("Total cost :" + r.calculateTotalCost(rooms));
+            }
+            //case 5
+            var summery = guests.Select(g => $"Guest name :{g.guestName} Room number : {g.roomNumber} nights : {g.totalNights} TotalCost : {g.calculateTotalCost(rooms)}").ToList();
+            foreach(string line in summery)
+            {
+                Console.WriteLine(line);
+            }
         }
     }
 }
