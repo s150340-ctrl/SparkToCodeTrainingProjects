@@ -100,6 +100,7 @@ namespace Task_7
             rooms.Add(new Room(5679, "single", 13.45));
             rooms.Add(new Room(5550, "double", 40.5));
             rooms.Add(new Room(2345, "suite", 100.5));
+            rooms[rooms.Count - 1].isAvailable = false; // just to test a case
 
             //main loop
 
@@ -412,7 +413,7 @@ namespace Task_7
                         {
                             //ask user for room type
                             string roomType = "";
-                            while ((roomType != "single") || (roomType != "double") || (roomType != "suite"))
+                            while ((roomType != "single") && (roomType != "double") && (roomType != "suite"))
                             {
                                 Console.Write("Enter room type (Single / Double / Suite):");
                                 roomType = Console.ReadLine().ToLower();
@@ -521,8 +522,12 @@ namespace Task_7
             Console.WriteLine("Total rooms currently booked :" + booked.Count());
             //case 3
             var ActiveGuests = guests.Where(r => r.roomNumber != "Not Assigned").ToList();
-            double avgPrice = ActiveGuests.Average(g => g.totalNights);
-            Console.WriteLine("Average nights spent :" + avgPrice);
+            if (ActiveGuests.Count() == 0) { Console.WriteLine("There are no active guests . Average nights spent are 0."); }
+            else
+            {
+                double avgPrice = ActiveGuests.Average(g => g.totalNights);
+                Console.WriteLine("Average nights spent :" + avgPrice);
+            }
             //case 4
             Console.WriteLine("=====================================");
             Console.WriteLine("       TOP 3 HIGHEST SPENDERS  ");
