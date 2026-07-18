@@ -156,7 +156,7 @@ namespace Task_7
                     case 11: GuestCheckOut( rooms, guests); break;
                     case 12: RemoveRooms(rooms, guests); break;
                     case 13: ExtendStay( rooms,  guests); break;
-                    case 14: ScholarshipEligibilityCheck(); break;
+                    case 14: HighestRevene(rooms, guests); break;
                     case 15: FullBalanceTopUpFlow(); break;
                     case 0:
                
@@ -815,6 +815,30 @@ namespace Task_7
                 Console.WriteLine("ERROR: invalid input");
             }
 
+
+        }
+        static void HighestRevene(List<Room> rooms, List<Guest> guests)
+        {
+            //case 1
+            var activeGuests = guests.Where(g=> g.roomNumber != "Not Assigned").ToList();
+            if(activeGuests.Count == 0)
+            {
+                Console.WriteLine("No active bookings recorded");
+                return;
+            }
+            //else
+            var activeGuestsRecord = activeGuests.Select(g => $"Guest name: {g.guestName} , Guest Room number : {g.roomNumber}, Total cost:{g.calculateTotalCost(rooms)}").ToList();
+            Console.WriteLine("=================================");
+            Console.WriteLine("    LOG OF ALL ACTIVE GUESTS");
+            Console.WriteLine("=================================");
+            foreach (string line in activeGuestsRecord)
+            {
+                Console.WriteLine(line);
+            }
+            //we order them
+            var highest = activeGuests.OrderByDescending(g => g.calculateTotalCost(rooms)).Take(1).FirstOrDefault();
+            //now we display
+            Console.WriteLine($"Guest name : {highest.guestName} Room number : {highest.roomNumber}, Total cost:{highest.calculateTotalCost(rooms)}");
 
         }
     }
