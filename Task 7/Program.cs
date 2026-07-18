@@ -151,7 +151,7 @@ namespace Task_7
                     case 6: SearchFilter(rooms); break;
                     case 7: GuestBooking(rooms, guests); break;
                     case 8: UpdateRoomPrice(rooms); break;
-                    case 9: TransferBetweenAccounts(); break;
+                    case 9: GuestLookUp( guests); break;
                     case 10: UpdateStudentGrade(); break;
                     case 11: StudentReportCard(); break;
                     case 12: AccountHealthStatus(); break;
@@ -241,7 +241,7 @@ namespace Task_7
             try
             {
                 Console.Write("Enter your name:");
-                string name = Console.ReadLine();
+                string name = Console.ReadLine().ToLower();
                 Console.Write("Enter check-in date as(11-02-2026):");
                 DateTime date = Convert.ToDateTime(Console.ReadLine());
                 int nightsStayed = -1;
@@ -294,7 +294,7 @@ namespace Task_7
                        //now we print info
                         guest.displayGuest();
                         //print total cost
-                        Console.WriteLine("Total cost :"+ guest.calculateTotalCost(roomBook.pricePerNight));
+                        Console.WriteLine("Total cost :"+ guest.calculateTotalCost(rooms));
 
 
                     }
@@ -363,11 +363,11 @@ namespace Task_7
                 Console.WriteLine("================================================");
                 Console.WriteLine("Menu for Searching & Filtering Rooms");
                 Console.WriteLine("================================================");
-                Console.WriteLine(" 1. Add New Room");
-                Console.WriteLine(" 2. Register New Guest");
-                Console.WriteLine(" 3. Book a Room for a Guest");
-                Console.WriteLine(" 4. View All Rooms ");
-                Console.WriteLine(" 0. Exit");
+                Console.WriteLine(" 1. Show all available rooms");
+                Console.WriteLine(" 2. Filter by room type");
+                Console.WriteLine(" 3. Filter by max price");
+                Console.WriteLine(" 4. Room price statistics");
+                Console.WriteLine(" 0. Back");
                 Console.WriteLine("================================================");
                 Console.Write("Enter your choice: ");
 
@@ -565,6 +565,36 @@ namespace Task_7
             }
 
 
+        }
+        static void GuestLookUp(List<Guest> guests)
+        {
+            try
+            {
+                //ask user
+                Console.Write("Enter the name you  want to search:");
+                string name = Console.ReadLine().ToLower();
+                //now we search
+                var matchingNames = guests.Where(r => r.guestName.Contains(name, StringComparison.OrdinalIgnoreCase)).ToList(); //will ignore the case
+                if (matchingNames.Count > 0)
+                {
+                    foreach (Guest g in matchingNames)
+                    {
+                        g.displayGuest();
+                    }
+
+                }
+                else
+                {
+                    Console.WriteLine("No guests matched that search");
+                }
+
+
+
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine("ERROR: invalid input");
+            }
         }
     }
 }
