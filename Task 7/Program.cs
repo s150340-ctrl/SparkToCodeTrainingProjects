@@ -209,7 +209,7 @@ namespace Task_7
                 {
                     rooms.Add(new Room(pin,roomType ,priceNight));
                     //message for last room added
-                    rooms[-1].displayRoom();
+                    rooms[rooms.Count-1].displayRoom();
                     Console.WriteLine("Updated room count: "+ rooms.Count);
 
 
@@ -258,7 +258,7 @@ namespace Task_7
                 newGuest.totalNights = nightsStayed;
                 guests.Add(newGuest);
                 //now we display information of guests
-                guests[-1].displayGuest();
+                guests[guests.Count-1 ].displayGuest();
             }
             catch(Exception ex) { Console.WriteLine("ERROR: invalid input"); }
 
@@ -343,7 +343,7 @@ namespace Task_7
             {
                 int amountguests = guests.Count();
                 Console.WriteLine("=====================================");
-                Console.WriteLine("Total room count :" + amountguests);
+                Console.WriteLine("Total guest count :" + amountguests);
                 Console.WriteLine("=====================================");
 
                 //we make a new list that is sorted
