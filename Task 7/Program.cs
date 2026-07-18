@@ -152,7 +152,7 @@ namespace Task_7
                     case 7: GuestBooking(rooms, guests); break;
                     case 8: UpdateRoomPrice(rooms); break;
                     case 9: GuestLookUp( guests); break;
-                    case 10: UpdateStudentGrade(); break;
+                    case 10: RoomTypeBreakDown( rooms); break;
                     case 11: StudentReportCard(); break;
                     case 12: AccountHealthStatus(); break;
                     case 13: BulkSaleWithRevenue(); break;
@@ -595,6 +595,31 @@ namespace Task_7
             {
                 Console.WriteLine("ERROR: invalid input");
             }
+        }
+        static void RoomTypeBreakDown(List<Room> rooms)
+        {
+            //first we get the lis of all types seperatly
+            var singleRooms = rooms.Where(r=> r.roomType =="single").ToList();
+            var doubleRooms = rooms.Where(r => r.roomType == "double").ToList();
+            var suiteRooms = rooms.Where(r => r.roomType == "suite").ToList();
+            //display count for each
+            Console.WriteLine("Amount of single Rooms: " + singleRooms.Count());
+            Console.WriteLine("Amount of double Rooms: " + doubleRooms.Count());
+            Console.WriteLine("Amount of suite Rooms: " + suiteRooms.Count());
+            //display average
+            if (singleRooms.Count > 0) { Console.WriteLine("Average price of single Rooms: " + singleRooms.Average(r=> r.pricePerNight)); }
+            else { Console.WriteLine("Average price of single Rooms: N/A "); }
+
+            if (doubleRooms.Count > 0) { Console.WriteLine("Average price of double Rooms: " + doubleRooms.Average(r=> r.pricePerNight)); }
+            else { Console.WriteLine("Average price of double Rooms: N/A "); }
+
+            if (suiteRooms.Count > 0) { Console.WriteLine("Average price of suite Rooms: " + suiteRooms.Average(r => r.pricePerNight)); }
+            else { Console.WriteLine("Average price of suite Rooms: N/A "); }
+            //average for all
+            Console.WriteLine("Average price of All Rooms: " + rooms.Average(r => r.pricePerNight));
+
+
+
         }
     }
 }
