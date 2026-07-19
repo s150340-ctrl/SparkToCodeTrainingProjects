@@ -1,4 +1,7 @@
 <Solution>
+  <Folder Name="/Solution Items/">
+    <File Path="DatabaseTasks/Airline Information System.drawio (1).png" />
+  </Folder>
   <Project Path="BankingSystemApp/BankingSystemApp.csproj" Id="014e7880-84f9-4cdf-b404-3fa0edfbd547" />
   <Project Path="First15Tasks/First15Tasks.csproj" />
   <Project Path="FirstCSharpProject/FirstCSharpProject.csproj" />
