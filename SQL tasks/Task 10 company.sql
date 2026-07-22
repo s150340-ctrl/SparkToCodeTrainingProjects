@@ -1,2 +1,2 @@
 --create file
-CREATE DATABASE CompanyDB;
+--now we use that database
