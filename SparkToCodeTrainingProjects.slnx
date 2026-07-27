@@ -9,6 +9,7 @@
     <File Path="DatabaseTasks/_College Management System(fixed).drawio.png" />
   </Folder>
   <Project Path="BankingSystemApp/BankingSystemApp.csproj" Id="014e7880-84f9-4cdf-b404-3fa0edfbd547" />
+  <Project Path="EFCoreProject/EFCoreProject.csproj" Id="8ab5df76-8acc-437f-8d80-48d690c57a46" />
   <Project Path="First15Tasks/First15Tasks.csproj" />
   <Project Path="FirstCSharpProject/FirstCSharpProject.csproj" />
   <Project Path="Task 2/Task 2.csproj" Id="e1c76397-27b7-40da-ab15-5a02015db260" />
