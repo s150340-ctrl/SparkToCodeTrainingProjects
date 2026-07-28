@@ -1,6 +1,6 @@
 ﻿namespace Task_8_EF
 {
-    internal class Program
+    public class Program
     {
         static void Main(string[] args)
         {
