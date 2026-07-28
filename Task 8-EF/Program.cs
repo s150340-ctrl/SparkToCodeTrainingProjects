@@ -446,8 +446,11 @@ namespace Task_8_EF
             }
             else
             {
-             
-                var order = context.orders.FirstOrDefault(o => o.UserID == loggedInUserId && o.review == null);//get order from database , only if order  has no review yet
+                //ask user for order id to add review
+                Console.Write("Enter Order ID to add review: ");
+                int orderId = int.Parse(Console.ReadLine());
+
+                var order = context.orders.Include(o => o.review).FirstOrDefault(o => o.UserID == loggedInUserId && o.review == null && o.OrderId == orderId);//get order from database , only if order  has no review yet
                 if (order != null)
                 {
                     //means this order has no review yet, we can add a review
