@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Task_8_EF.Models;
 
 namespace Task_8_EF
 {
@@ -70,6 +71,29 @@ namespace Task_8_EF
         static void RegisterUser()
         {
             // TODO: implement (see Part 3 requirements)
+            try
+            {
+                //first we will read 
+                User newUser = new User();
+                Console.Write("Enter your name: ");
+                newUser.UserName = Console.ReadLine();
+                Console.Write("Enter your email: ");
+                newUser.UserEmail = Console.ReadLine();
+                Console.Write("Enter your password: ");
+                newUser.UserPassword = Console.ReadLine();
+                Console.Write("Enter your Address: ");
+                newUser.UserAddress = Console.ReadLine().ToLower();
+
+                //add info
+                context.users.Add(newUser);
+                context.SaveChanges();  
+
+
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine("Error : invalid input");
+            }
         }
         static void Login()
         {
