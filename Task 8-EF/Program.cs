@@ -353,9 +353,16 @@ namespace Task_8_EF
 
                     }
                     //after we are done adding products, we save the order to the database
-                    context.orders.Add(order);
-                    context.SaveChanges();
-
+                    if (order.ProdOrderList.Any())
+                    {
+                        context.orders.Add(order);
+                        context.SaveChanges();
+                        Console.WriteLine("Order placed successfully!");
+                    }
+                    else
+                    {
+                        Console.WriteLine("No items were added. Order cancelled.");
+                    }
 
                 }
             }
