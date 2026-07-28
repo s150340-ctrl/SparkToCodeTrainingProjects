@@ -126,14 +126,132 @@ namespace Task_8_EF
         static void AddCategory()
         {
             // TODO: implement
+            try
+            {
+                //first we will read 
+                Category newCategory = new Category();
+                Console.Write("Enter category name: ");
+                newCategory.CategoryName = Console.ReadLine();
+
+                //add info
+                context.Categories.Add(newCategory);
+                context.SaveChanges();
+
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error : invalid input");
+            }
         }
         static void AddProduct()
         {
-            // TODO: implement
+            // TODO: implement product details
+            //first we check if there are any categories in the database
+            if (!context.Categories.Any())
+            {
+                Console.WriteLine("No categories found. Please add a category first.");
+                return;
+            }
+            else
+            {
+                try
+                {
+                    //first we will read 
+                    Product newProduct = new Product();
+                    Console.Write("Enter product name: ");
+                    newProduct.ProductName = Console.ReadLine();
+                    //as well as price
+                    double price = -1;
+                    Console.Write("Enter product price: ");
+                    while(price < 0)
+                    {
+                        try
+                        {
+                            price = double.Parse(Console.ReadLine());
+                            if (price < 0)
+                            {
+                                Console.WriteLine("ERROR :Price cannot be negative");
+                            }
+                        }
+                        catch (Exception)
+                        {
+                            Console.WriteLine("ERROR :Invalid input.");
+                        }
+                    }
+                    newProduct.ProductPrice = price; //set price
+
+
+                    //then we will display all categories and ask user to select one
+                    Console.WriteLine("Select a category for the product:");
+                    var categories = context.Categories.ToList(); //ok so this is better than using it directly in case we want to use it later
+                    foreach (var category in categories) { 
+                        Console.WriteLine(category.CategoryName);//get all names
+                    
+                    }
+                    Console.Write("Enter category name of your choice: ");
+                    string CategoryName = Console.ReadLine();
+                    Category foundCategory = categories.FirstOrDefault(c => c.CategoryName.ToLower() == CategoryName.ToLower());
+                    if (foundCategory != null) {
+                        //then we save the product
+                        int categoryId = foundCategory.CategoryId;
+                        newProduct.CategoryId = categoryId;
+                        //save product info
+                        context.products.Add(newProduct);
+                        context.SaveChanges();
+
+                    }
+                    else
+                    {
+                        Console.WriteLine("ERROR :Invalid category name.");
+                    }
+
+
+
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Error : invalid input");
+                }
+            }
         }
         static void ViewAllProducts()
         {
             // TODO: implement
+            try
+            {
+                //ask for a catgory name
+                Console.Write("Enter category name to view products: ");
+                string CategoryName = Console.ReadLine().ToLower();
+                Category foundCategory = context.Categories.FirstOrDefault(c => c.CategoryName.ToLower() == CategoryName.ToLower());
+                if (foundCategory != null)
+                {
+                    //we get id
+                    int categoryId = foundCategory.CategoryId;
+
+                    //search for category in database from products
+                    var products = context.products.Where(p => p.CategoryId == categoryId).ToList();
+                    //display products
+                    Console.WriteLine("=============================");
+                    Console.WriteLine($"    ALL PRODUCTS IN {foundCategory.CategoryName}");
+                    Console.WriteLine("=============================");
+                    foreach (var product in products)
+                    {
+                        Console.WriteLine($"Product Name: {product.ProductName}, Price: {product.ProductPrice}");
+                    }
+
+                   
+                }
+                else
+                {
+                    Console.WriteLine("ERROR :Invalid category name.");
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error : invalid input");
+            }
         }
         static void PlaceOrder()
         {
