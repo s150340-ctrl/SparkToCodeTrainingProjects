@@ -23,7 +23,7 @@ namespace Task_8_EF
         protected override void OnConfiguring(DbContextOptionsBuilder options)
         {
             options.UseSqlServer(
-                "Server=.\\SQLEXPRESS;Database=CompanyProjectDB;Trusted_Connection=True;TrustServerCertificate=True;"
+                "Server=.\\SQLEXPRESS;Database=OrderSimulaterDB;Trusted_Connection=True;TrustServerCertificate=True;"
             );
         }
     }
