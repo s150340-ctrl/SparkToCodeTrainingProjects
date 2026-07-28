@@ -16,8 +16,9 @@ namespace EFCoreProject.Models
         public Employee employee { get; set; }
         //1-M
         [ForeignKey("project")]
-        public Project project { get; set; }
+      
         public int ProjectId { get; set; }
+        public Project project { get; set; }
 
         public int Hours { get; set; }
 
