@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Task_8_EF.Models
 {
-    [PrimaryKey(nameof(ReviewId), nameof(UserID))]
+    [PrimaryKey(nameof(ReviewId), nameof(OrderId))]
     public class Review
     {
         public int ReviewId { get; set; }
@@ -14,10 +14,10 @@ namespace Task_8_EF.Models
         public double ReviewRating { get; set; }
 
         //each review has 1 order  1-1
-        [ForeignKey("user")]
+        [ForeignKey("order")]
 
-        public int UserID { get; set; }
-        public User user { get; set; }
+        public int OrderId { get; set; }
+        public Order order { get; set; }
 
     }
 }

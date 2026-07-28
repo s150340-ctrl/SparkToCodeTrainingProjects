@@ -486,12 +486,35 @@ namespace Task_8_EF
 
             }
         }
-            static void ViewReviewsForProduct()
+        static void ViewReviewsForProduct()
+        {
+            try
             {
-            
+                Console.Write("Enter Product Name to view reviews: ");
+                string productName = Console.ReadLine();
+                var reviews = context.reviews.Where(r => r.order.ProdOrderList.Any(po => po.product.ProductName.ToLower() == productName.ToLower())).ToList();
 
+                if (reviews != null)
+                {
+                    Console.WriteLine($"Reviews for Product: {productName}");
+                    foreach (var review in reviews)
+                    {
+                        Console.WriteLine($"Review Comment: {review.ReviewComment}, Rating: {review.ReviewRating}");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("No reviews found for the given product.");
+                }
+
+                  
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error : invalid input");
 
             }
+        }
           
             static void Logout()
             {
