@@ -12,7 +12,7 @@ using Task_8_EF;
 namespace Task_8_EF.Migrations
 {
     [DbContext(typeof(ProjectContext))]
-    [Migration("20260728191046_initialCreate")]
+    [Migration("20260728191410_initialCreate")]
     partial class initialCreate
     {
         /// <inheritdoc />
