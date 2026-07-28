@@ -6,38 +6,40 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace EFCoreProject.Migrations
 {
     /// <inheritdoc />
-    public partial class addednewdb : Migration
+    public partial class initialCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.AddColumn<int>(
-                name: "DepartmentId",
-                table: "employees",
-                type: "int",
-                nullable: false,
-                defaultValue: 0);
+            migrationBuilder.CreateTable(
+                name: "projects",
+                columns: table => new
+                {
+                    ProjectId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ProjectName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ProjectLocation = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_projects", x => x.ProjectId);
+                });
 
-            migrationBuilder.AddColumn<int>(
-                name: "SuperviseId",
-                table: "employees",
-                type: "int",
-                nullable: false,
-                defaultValue: 0);
-
-            migrationBuilder.AddColumn<int>(
-                name: "EmployeeId",
-                table: "departments",
-                type: "int",
-                nullable: false,
-                defaultValue: 0);
-
-            migrationBuilder.AddColumn<DateTime>(
-                name: "manageStartDate",
-                table: "departments",
-                type: "datetime2",
-                nullable: false,
-                defaultValue: new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified));
+            migrationBuilder.CreateTable(
+                name: "departments",
+                columns: table => new
+                {
+                    DepartmentId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    DepartmentNumber = table.Column<int>(type: "int", nullable: false),
+                    DepartmentName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    EmployeeId = table.Column<int>(type: "int", nullable: false),
+                    manageStartDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_departments", x => x.DepartmentId);
+                });
 
             migrationBuilder.CreateTable(
                 name: "depLocations",
@@ -58,17 +60,34 @@ namespace EFCoreProject.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "projects",
+                name: "employees",
                 columns: table => new
                 {
-                    ProjectId = table.Column<int>(type: "int", nullable: false)
+                    EmployeeId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    ProjectName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ProjectLocation = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    EmployeeSsn = table.Column<int>(type: "int", nullable: false),
+                    EmployeeName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    EmployeeAge = table.Column<int>(type: "int", nullable: false),
+                    EmployeeSalary = table.Column<double>(type: "float", nullable: false),
+                    DepartmentId = table.Column<int>(type: "int", nullable: false),
+                    SuperviseId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_projects", x => x.ProjectId);
+                    table.PrimaryKey("PK_employees", x => x.EmployeeId);
+                    table.ForeignKey(
+                        name: "FK_employees_departments_DepartmentId",
+                        column: x => x.DepartmentId,
+                        principalTable: "departments",
+                        principalColumn: "DepartmentId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_employees_employees_SuperviseId",
+                        column: x => x.SuperviseId,
+                        principalTable: "employees",
+                        principalColumn: "EmployeeId",
+                        onDelete: ReferentialAction.NoAction,
+                        onUpdate: ReferentialAction.NoAction);
                 });
 
             migrationBuilder.CreateTable(
@@ -97,6 +116,12 @@ namespace EFCoreProject.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_departments_EmployeeId",
+                table: "departments",
+                column: "EmployeeId",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
                 name: "IX_employees_DepartmentId",
                 table: "employees",
                 column: "DepartmentId");
@@ -105,12 +130,6 @@ namespace EFCoreProject.Migrations
                 name: "IX_employees_SuperviseId",
                 table: "employees",
                 column: "SuperviseId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_departments_EmployeeId",
-                table: "departments",
-                column: "EmployeeId",
-                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_empProjects_ProjectId",
@@ -123,23 +142,7 @@ namespace EFCoreProject.Migrations
                 column: "EmployeeId",
                 principalTable: "employees",
                 principalColumn: "EmployeeId",
-                onDelete: ReferentialAction.Cascade);
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_employees_departments_DepartmentId",
-                table: "employees",
-                column: "DepartmentId",
-                principalTable: "departments",
-                principalColumn: "DepartmentId",
-                onDelete: ReferentialAction.Cascade);
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_employees_employees_SuperviseId",
-                table: "employees",
-                column: "SuperviseId",
-                principalTable: "employees",
-                principalColumn: "EmployeeId",
-                onDelete: ReferentialAction.Cascade);
+                onDelete: ReferentialAction.NoAction); // <-- Changed from Cascade to NoAction
         }
 
         /// <inheritdoc />
@@ -148,14 +151,6 @@ namespace EFCoreProject.Migrations
             migrationBuilder.DropForeignKey(
                 name: "FK_departments_employees_EmployeeId",
                 table: "departments");
-
-            migrationBuilder.DropForeignKey(
-                name: "FK_employees_departments_DepartmentId",
-                table: "employees");
-
-            migrationBuilder.DropForeignKey(
-                name: "FK_employees_employees_SuperviseId",
-                table: "employees");
 
             migrationBuilder.DropTable(
                 name: "depLocations");
@@ -166,33 +161,11 @@ namespace EFCoreProject.Migrations
             migrationBuilder.DropTable(
                 name: "projects");
 
-            migrationBuilder.DropIndex(
-                name: "IX_employees_DepartmentId",
-                table: "employees");
+            migrationBuilder.DropTable(
+                name: "employees");
 
-            migrationBuilder.DropIndex(
-                name: "IX_employees_SuperviseId",
-                table: "employees");
-
-            migrationBuilder.DropIndex(
-                name: "IX_departments_EmployeeId",
-                table: "departments");
-
-            migrationBuilder.DropColumn(
-                name: "DepartmentId",
-                table: "employees");
-
-            migrationBuilder.DropColumn(
-                name: "SuperviseId",
-                table: "employees");
-
-            migrationBuilder.DropColumn(
-                name: "EmployeeId",
-                table: "departments");
-
-            migrationBuilder.DropColumn(
-                name: "manageStartDate",
-                table: "departments");
+            migrationBuilder.DropTable(
+                name: "departments");
         }
     }
 }
