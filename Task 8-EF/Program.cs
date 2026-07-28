@@ -296,7 +296,7 @@ namespace Task_8_EF
                         try
                         {
                             //ask for product name
-                           
+
                             Console.Write("Enter product name to order: ");
                             string ProductName = Console.ReadLine().ToLower();
                             Product foundProduct = context.products.FirstOrDefault(p => p.ProductName.ToLower() == ProductName.ToLower());
@@ -324,7 +324,8 @@ namespace Task_8_EF
                                 }
                                 //check if the product is already in the order list, if yes, we update the quantity
                                 var existingProdOrder = order.ProdOrderList.FirstOrDefault(po => po.ProductId == productId); //btw this was a suggestion from ai to prevent a logical error
-                                if (existingProdOrder != null) {
+                                if (existingProdOrder != null)
+                                {
 
                                     existingProdOrder.Quantity += quantity;
                                 }
@@ -366,9 +367,34 @@ namespace Task_8_EF
 
                 }
             }
+        }
             static void ViewMyOrders()
             {
                 // TODO: implement - check loggedInUserId != 0 first
+                if(loggedInUserId == 0)
+                {
+                    Console.WriteLine("Please log in first.");
+                    return;
+                }
+                else
+                {
+                    //search for orders in the database
+                    var orders = context.orders.Where(o => o.UserID == loggedInUserId).ToList();
+                    if (orders.Any())
+                    {
+                        Console.WriteLine("=============================");
+                        Console.WriteLine("        MY ORDERS ");
+                        Console.WriteLine("=============================");
+                        foreach (var order in orders)
+                        {
+                            Console.WriteLine($"Order ID: {order.OrderId}, Order Date: {order.OrderDate}");
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("No orders found.");
+                    }
+                }
             }
             static void ViewOrderDetails()
             {
@@ -387,8 +413,10 @@ namespace Task_8_EF
             static void Logout()
             {
                 // TODO: implement - reset loggedInUserId back to 0
+                loggedInUserId = 0;
+                Console.WriteLine("You have been logged out.");    
             }
         }
     }
-}
+
 
