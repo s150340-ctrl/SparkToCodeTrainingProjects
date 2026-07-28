@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
@@ -7,6 +8,7 @@ namespace EFCoreProject.Models
 {
     public class Department
     {
+        [Key]
         public int DepartmentId { get; set; } //1.2
         public int DepartmentNumber { get; set; }//10,20
         public string DepartmentName { get; set; }
@@ -20,5 +22,6 @@ namespace EFCoreProject.Models
         [ForeignKey("manager")]
         public int EmployeeId { get; set; }
         public Employee manager {  get; set; }
+        public DateTime manageStartDate { get; set; }
     }
 }

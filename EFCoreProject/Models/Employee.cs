@@ -9,6 +9,7 @@ namespace EFCoreProject.Models
     public class Employee
     {
         public int EmployeeSsn {  get; set; }
+        [Key]
         public int EmployeeId { get; set; }
         public string EmployeeName { get; set; }
         public int EmployeeAge { get; set; }
