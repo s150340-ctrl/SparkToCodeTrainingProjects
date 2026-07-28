@@ -106,7 +106,8 @@ namespace Task_8_EF.Migrations
                         column: x => x.UserID,
                         principalTable: "users",
                         principalColumn: "UserID",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.NoAction,  
+                        onUpdate: ReferentialAction.NoAction);
                 });
 
             migrationBuilder.CreateTable(
