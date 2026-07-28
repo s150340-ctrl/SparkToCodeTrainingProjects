@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 using Task_8_EF.Models;
 
 namespace Task_8_EF
@@ -86,11 +87,11 @@ namespace Task_8_EF
 
                 //add info
                 context.users.Add(newUser);
-                context.SaveChanges();  
+                context.SaveChanges();
 
 
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Console.WriteLine("Error : invalid input");
             }
@@ -106,7 +107,8 @@ namespace Task_8_EF
                 string UserPassword = Console.ReadLine().ToLower();
                 //search for user in database
                 User foundUser = context.users.FirstOrDefault(u => u.UserEmail.ToLower() == UserEmail.ToLower() && u.UserPassword.ToLower() == UserPassword);
-                if (foundUser != null) {
+                if (foundUser != null)
+                {
                     loggedInUserId = foundUser.UserID;
                     Console.WriteLine("Login successful. Welcome, " + foundUser.UserName + "!");
                 }
@@ -164,7 +166,7 @@ namespace Task_8_EF
                     //as well as price
                     double price = -1;
                     Console.Write("Enter product price: ");
-                    while(price < 0)
+                    while (price < 0)
                     {
                         try
                         {
@@ -185,14 +187,16 @@ namespace Task_8_EF
                     //then we will display all categories and ask user to select one
                     Console.WriteLine("Select a category for the product:");
                     var categories = context.Categories.ToList(); //ok so this is better than using it directly in case we want to use it later
-                    foreach (var category in categories) { 
+                    foreach (var category in categories)
+                    {
                         Console.WriteLine(category.CategoryName);//get all names
-                    
+
                     }
                     Console.Write("Enter category name of your choice: ");
                     string CategoryName = Console.ReadLine();
                     Category foundCategory = categories.FirstOrDefault(c => c.CategoryName.ToLower() == CategoryName.ToLower());
-                    if (foundCategory != null) {
+                    if (foundCategory != null)
+                    {
                         //then we save the product
                         int categoryId = foundCategory.CategoryId;
                         newProduct.CategoryId = categoryId;
@@ -240,7 +244,7 @@ namespace Task_8_EF
                         Console.WriteLine($"Product Name: {product.ProductName}, Price: {product.ProductPrice}");
                     }
 
-                   
+
                 }
                 else
                 {
@@ -256,28 +260,127 @@ namespace Task_8_EF
         static void PlaceOrder()
         {
             // TODO: implement - check loggedInUserId != 0 first
-        }
-        static void ViewMyOrders()
-        {
-            // TODO: implement - check loggedInUserId != 0 first
-        }
-        static void ViewOrderDetails()
-        {
-            // TODO: implement
-        }
-        static void AddReview()
-        {
-            // TODO: implement - check loggedInUserId != 0 first
-        }
-        static void ViewReviewsForProduct()
-        { 
+            if (loggedInUserId == 0)
+            {
+                Console.WriteLine("Please log in first.");
+                return;
+            }
+            else
+            {
+                //create a new order to save it to the database
+                var order = new Order();
+                order.UserID = loggedInUserId;
+                order.OrderDate = DateTime.Now;
+                order.ProdOrderList = new List<ProdOrder>();
 
-        
-        }
-        // TODO: implement
-        static void Logout()
-        {
-            // TODO: implement - reset loggedInUserId back to 0
+                //check if there are any products in the database
+                if (!context.products.Any())
+                {
+                    Console.WriteLine("No products found. Please add a product first.");
+                    return;
+                }
+                else
+                {
+                    Console.WriteLine("=============================");
+                    Console.WriteLine("        ALL PRODUCTS ");
+                    Console.WriteLine("=============================");
+
+                    foreach (var product in context.products.ToList())
+                    {
+                        Console.WriteLine($"Product Name: {product.ProductName}, Price: {product.ProductPrice} ,Product ID: {product.ProductId}");
+                    }
+                    //keep reading
+                    bool stop = false;
+                    while (!stop)
+                    {
+                        try
+                        {
+                            //ask for product name
+                           
+                            Console.Write("Enter product name to order: ");
+                            string ProductName = Console.ReadLine().ToLower();
+                            Product foundProduct = context.products.FirstOrDefault(p => p.ProductName.ToLower() == ProductName.ToLower());
+                            if (foundProduct != null)
+                            {
+                                //we get id
+                                int productId = foundProduct.ProductId;
+                                //ask for quantity
+                                int quantity = -1;
+                                Console.Write("Enter quantity: ");
+                                while (quantity <= 0)
+                                {
+                                    try
+                                    {
+                                        quantity = int.Parse(Console.ReadLine());
+                                        if (quantity <= 0)
+                                        {
+                                            Console.WriteLine("ERROR :Quantity must be a positive number");
+                                        }
+                                    }
+                                    catch (Exception)
+                                    {
+                                        Console.WriteLine("ERROR :Invalid input.");
+                                    }
+                                }
+                                //check if the product is already in the order list, if yes, we update the quantity
+                                var existingProdOrder = order.ProdOrderList.FirstOrDefault(po => po.ProductId == productId); //btw this was a suggestion from ai to prevent a logical error
+                                if (existingProdOrder != null) {
+
+                                    existingProdOrder.Quantity += quantity;
+                                }
+                                else
+                                {
+                                    //create order and save it in list
+                                    order.ProdOrderList.Add(new ProdOrder { ProductId = productId, Quantity = quantity });
+                                }
+                                //ask user if they want to add more products
+                                Console.WriteLine("Do you want to add more products? (yes/no)");
+                                string response = Console.ReadLine().ToLower();
+                                if (response != "yes")
+                                {
+                                    stop = true;
+                                }
+                            }
+                            else
+                            {
+                                Console.WriteLine("ERROR :Invalid product name.");
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine("Error : invalid input");
+                        }
+
+                    }
+                    //after we are done adding products, we save the order to the database
+                    context.orders.Add(order);
+                    context.SaveChanges();
+
+
+                }
+            }
+            static void ViewMyOrders()
+            {
+                // TODO: implement - check loggedInUserId != 0 first
+            }
+            static void ViewOrderDetails()
+            {
+                // TODO: implement
+            }
+            static void AddReview()
+            {
+                // TODO: implement - check loggedInUserId != 0 first
+            }
+            static void ViewReviewsForProduct()
+            {
+
+
+            }
+            // TODO: implement
+            static void Logout()
+            {
+                // TODO: implement - reset loggedInUserId back to 0
+            }
         }
     }
 }
