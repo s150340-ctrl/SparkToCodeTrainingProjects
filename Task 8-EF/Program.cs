@@ -98,6 +98,30 @@ namespace Task_8_EF
         static void Login()
         {
             // TODO: implement - on success, set loggedInUserId = <found user's Id>
+            try
+            {
+                Console.Write("Enter your email: ");
+                string UserEmail = Console.ReadLine();
+                Console.Write("Enter your password: ");
+                string UserPassword = Console.ReadLine().ToLower();
+                //search for user in database
+                User foundUser = context.users.FirstOrDefault(u => u.UserEmail.ToLower() == UserEmail.ToLower() && u.UserPassword.ToLower() == UserPassword);
+                if (foundUser != null) {
+                    loggedInUserId = foundUser.UserID;
+                    Console.WriteLine("Login successful. Welcome, " + foundUser.UserName + "!");
+                }
+                else
+                {
+                    Console.WriteLine("Invalid email or password.");
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error : invalid input");
+            }
+
         }
         static void AddCategory()
         {
