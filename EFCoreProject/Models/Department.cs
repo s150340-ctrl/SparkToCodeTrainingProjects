@@ -9,5 +9,7 @@ namespace EFCoreProject.Models
         public int DepartmentId { get; set; } //1.2
         public int DepartmentNumber { get; set; }//10,20
         public string DepartmentName { get; set; }
+        //works for
+        public List<Employee>  Employees { get; set; }
     }
 }
