@@ -438,8 +438,50 @@ namespace Task_8_EF
         }
             static void AddReview()
             {
-                // TODO: implement - check loggedInUserId != 0 first
+            // TODO: implement - check loggedInUserId != 0 first
+            if (loggedInUserId == 0)
+            {
+                Console.WriteLine("Please log in first.");
+                return;
             }
+            else
+            {
+             
+                var order = context.orders.FirstOrDefault(o => o.UserID == loggedInUserId && o.review == null);//get order from database , only if order  has no review yet
+                if (order != null)
+                {
+                    //means this order has no review yet, we can add a review
+                    order.review = new Review();
+                    Console.Write("Enter your review comment: ");
+                    order.review.ReviewComment = Console.ReadLine();
+                    double rating = -1;
+                    while (rating < 0 || rating > 5)
+                    {
+                        Console.Write("Enter your review rating (0-5): ");
+                        try
+                        {
+                            rating = double.Parse(Console.ReadLine());
+                            if (rating < 0 || rating > 5)
+                            {
+                                Console.WriteLine("ERROR :Rating must be between 0 and 5");
+                            }
+                        }
+                        catch (Exception)
+                        {
+                            Console.WriteLine("ERROR :Invalid input.");
+                        }
+                    }
+                    order.review.ReviewRating = rating;
+                    Console.WriteLine("Review added successfully.");
+                    context.SaveChanges();
+                }
+                else
+                {
+                    Console.WriteLine("No order found with the given ID.");
+                }
+
+            }
+        }
             static void ViewReviewsForProduct()
             {
 
