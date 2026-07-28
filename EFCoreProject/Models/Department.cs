@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace EFCoreProject.Models
@@ -10,6 +11,14 @@ namespace EFCoreProject.Models
         public int DepartmentNumber { get; set; }//10,20
         public string DepartmentName { get; set; }
         //works for
+        [InverseProperty("D")]
         public List<Employee>  Employees { get; set; }
+
+
+
+        //manages
+        [ForeignKey("manager")]
+        public int EmployeeId { get; set; }
+        public Employee manager {  get; set; }
     }
 }

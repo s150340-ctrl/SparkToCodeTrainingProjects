@@ -18,5 +18,22 @@ namespace EFCoreProject.Models
         public int DepartmentId { get; set; }
 
         public Department D {  get; set; }
+        //many to many (works on)-
+       // public List<Project> projects { get; set; }
+
+        //works on
+        public List<empProject> emp { get; set; }
+
+        //manages
+        [InverseProperty("manager")]
+        public Department mangedDepartment { get; set; }
+
+
+        //supervision 1-M self relationship
+        [InverseProperty("superviser")]
+        public List<Employee> supervisee {  get; set; }
+        [ForeignKey("superviser")]
+        public int SuperviseId { get; set; }
+        public Employee superviser {  get; set; }
     }
 }
