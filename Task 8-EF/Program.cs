@@ -378,9 +378,10 @@ namespace Task_8_EF
                 }
                 else
                 {
-                    //search for orders in the database
-                    var orders = context.orders.Where(o => o.UserID == loggedInUserId).ToList();
-                    if (orders.Any())
+                //search for orders in the database
+                var orders = context.orders.Include(o => o.ProdOrderList).ThenInclude(po => po.product).Where(o => o.UserID == loggedInUserId).ToList();
+
+                if (orders.Any())
                     {
                         Console.WriteLine("=============================");
                         Console.WriteLine("        MY ORDERS ");
@@ -487,10 +488,11 @@ namespace Task_8_EF
         }
             static void ViewReviewsForProduct()
             {
+            
 
 
             }
-            // TODO: implement
+          
             static void Logout()
             {
                 // TODO: implement - reset loggedInUserId back to 0
