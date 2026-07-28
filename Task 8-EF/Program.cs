@@ -396,10 +396,46 @@ namespace Task_8_EF
                     }
                 }
             }
-            static void ViewOrderDetails()
+        static void ViewOrderDetails()
+        {
+            // TODO: implement
+            try
             {
-                // TODO: implement
+                Console.Write("Enter Order ID to view details: ");
+                int orderId = int.Parse(Console.ReadLine());
+                var order = context.orders.FirstOrDefault(o => o.OrderId == orderId);//get order from database
+                if (order != null)
+                {
+                    Console.WriteLine($"Order ID: {order.OrderId}, Order Date: {order.OrderDate}");
+                    Console.WriteLine("Products in this order:");
+                    double totalPrice = 0;
+                    foreach (var prodOrder in order.ProdOrderList)
+                    {
+                        Console.WriteLine($"Product Name: {prodOrder.product.ProductName}, Quantity: {prodOrder.Quantity}, Price: {prodOrder.product.ProductPrice}");
+                        totalPrice += prodOrder.Quantity * prodOrder.product.ProductPrice; //calculate total price
+                    }
+                    Console.WriteLine($"Total Price: {totalPrice}");
+                    //display reviews for this order if any
+                    if(order.review != null)
+                    {
+                        Console.WriteLine($"Review for this order: {order.review.ReviewComment}, Rating: {order.review.ReviewRating}");
+                    }
+                    else
+                    {
+                        Console.WriteLine("No review for this order.");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("No order found with the given ID.");
+                }
+
             }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error : invalid input");
+            }
+        }
             static void AddReview()
             {
                 // TODO: implement - check loggedInUserId != 0 first
