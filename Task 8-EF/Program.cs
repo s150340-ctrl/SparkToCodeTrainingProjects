@@ -335,7 +335,7 @@ namespace Task_8_EF
                                     order.ProdOrderList.Add(new ProdOrder { ProductId = productId, Quantity = quantity });
                                 }
                                 //ask user if they want to add more products
-                                Console.WriteLine("Do you want to add more products? (yes/no)");
+                                Console.WriteLine("Do you want to stop adding products? (yes/no)");
                                 string response = Console.ReadLine().ToLower();
                                 if (response != "yes")
                                 {
