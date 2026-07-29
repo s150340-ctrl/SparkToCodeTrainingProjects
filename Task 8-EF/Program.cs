@@ -404,7 +404,7 @@ namespace Task_8_EF
             {
                 Console.Write("Enter Order ID to view details: ");
                 int orderId = int.Parse(Console.ReadLine());
-                var order = context.orders.FirstOrDefault(o => o.OrderId == orderId);//get order from database
+                var order = context.orders.Include(o => o.ProdOrderList).ThenInclude(po=> po.product).FirstOrDefault(o => o.OrderId == orderId);//get order from database
                 if (order != null)
                 {
                     Console.WriteLine($"Order ID: {order.OrderId}, Order Date: {order.OrderDate}");
