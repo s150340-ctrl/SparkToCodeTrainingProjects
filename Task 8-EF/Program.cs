@@ -337,7 +337,7 @@ namespace Task_8_EF
                                 //ask user if they want to add more products
                                 Console.WriteLine("Do you want to stop adding products? (yes/no)");
                                 string response = Console.ReadLine().ToLower();
-                                if (response != "yes")
+                                if (response == "yes")
                                 {
                                     stop = true;
                                 }
