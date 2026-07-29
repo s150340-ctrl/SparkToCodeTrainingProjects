@@ -405,6 +405,8 @@ namespace Task_8_EF
                 Console.Write("Enter Order ID to view details: ");
                 int orderId = int.Parse(Console.ReadLine());
                 var order = context.orders.Include(o => o.ProdOrderList).ThenInclude(po=> po.product).FirstOrDefault(o => o.OrderId == orderId);//get order from database
+                //so Note : then inculde is used bec i want to check the other class ,that is one relationship deep ,"then include" is used to get the product details from the ProdOrder class so its 2 lvl deep
+                //we do this so that we can get the details without getting null reference exception when we try to access the product details from the ProdOrder class
                 if (order != null)
                 {
                     Console.WriteLine($"Order ID: {order.OrderId}, Order Date: {order.OrderDate}");
@@ -481,7 +483,7 @@ namespace Task_8_EF
                 }
                 else
                 {
-                    Console.WriteLine("No order found with the given ID.");
+                    Console.WriteLine("No order found with the given ID OR the order already has a review.");//just added the OR part to make it more clear
                 }
 
             }
@@ -494,7 +496,7 @@ namespace Task_8_EF
                 string productName = Console.ReadLine();
                 var reviews = context.reviews.Where(r => r.order.ProdOrderList.Any(po => po.product.ProductName.ToLower() == productName.ToLower())).ToList();
 
-                if (reviews != null)
+                if (reviews.Any()) //logical error because where will return an empty list if no reviews found, so we need to check if the list is empty or not
                 {
                     Console.WriteLine($"Reviews for Product: {productName}");
                     foreach (var review in reviews)
