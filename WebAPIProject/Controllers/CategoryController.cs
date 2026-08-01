@@ -1,8 +1,11 @@
-﻿using WebAPIProject.Models;
+﻿using Microsoft.AspNetCore.Mvc;
+using WebAPIProject.Models;
 
 namespace WebAPIProject.Controllers
 {
-    public class CategoryController
+    [ApiController]
+    [Route("Category")]
+    public class CategoryController : ControllerBase
     {
         private ProjectContext context;
 
@@ -10,12 +13,14 @@ namespace WebAPIProject.Controllers
         {
             context = _context;
         }
+        [HttpPost("AddCategory")]
 
         public void AddCategory(Category c)
         {
             context.categories.Add(c);
             context.SaveChanges();
         }
+        [HttpDelete("RemoveCategory")]
         public void RemoveCategory(int id)
         {
             var category = context.categories.FirstOrDefault(c => c.CategoryId == id);
@@ -27,16 +32,18 @@ namespace WebAPIProject.Controllers
             else { }
         }
 
-
+        [HttpGet("GetCategory")]
         public Category GetCategory(int id)
         {
             var category = context.categories.FirstOrDefault(c => c.CategoryId == id);
             return category;
         }
+        [HttpGet("GetAllCategories")]
         public List<Category> GetAllCategories()
         {
             return context.categories.ToList();
         }
+        [HttpGet("GetByName")]
         public List<Category> GetByName(string name)
         {
             return context.categories.Where(c => c.CategoryName.Contains(name)).ToList();
