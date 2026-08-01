@@ -39,7 +39,7 @@ namespace WebAPIProject.Migrations
 
                     b.HasKey("CategoryId");
 
-                    b.ToTable("categories");
+                    b.ToTable("categories", (string)null);
                 });
 
             modelBuilder.Entity("WebAPIProject.Models.Product", b =>
@@ -68,7 +68,7 @@ namespace WebAPIProject.Migrations
 
                     b.HasIndex("CategoryId");
 
-                    b.ToTable("products");
+                    b.ToTable("products", (string)null);
                 });
 
             modelBuilder.Entity("WebAPIProject.Models.Product", b =>
